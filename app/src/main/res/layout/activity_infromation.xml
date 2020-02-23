@@ -20,7 +20,7 @@
             >
 
             <EditText
-                android:id="@+id/name"
+                android:id="@+id/edi_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Name"
@@ -34,7 +34,7 @@
 
                 />
             <EditText
-                android:id="@+id/designation"
+                android:id="@+id/edi_designation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Designation"
@@ -45,21 +45,21 @@
                 android:padding="8dp"
                 android:layout_marginBottom="16dp"
                 />
-            <EditText
-                android:id="@+id/division"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Division/Project"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textAlignment="center"
-                android:background="@drawable/edit_text_border"
-                android:padding="8dp"
-                android:layout_marginBottom="16dp"
-                />
 
             <EditText
-                android:id="@+id/company_name"
+                android:id="@+id/edi_division"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="Division/Project"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/edi_company_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ministry/Company Name"
@@ -71,7 +71,7 @@
                 android:layout_marginBottom="16dp"
                 />
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/edi_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
@@ -110,7 +110,7 @@
 
 
                 <EditText
-                    android:id="@+id/phone"
+                    android:id="@+id/edi_phone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
@@ -151,7 +151,7 @@
 
 
                 <EditText
-                    android:id="@+id/fax"
+                    android:id="@+id/edi_fax"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
@@ -192,7 +192,7 @@
 
 
                 <EditText
-                    android:id="@+id/mobile"
+                    android:id="@+id/edi_mobile"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
@@ -207,7 +207,7 @@
 
             </LinearLayout>
             <EditText
-                android:id="@+id/web_address"
+                android:id="@+id/edi_web_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Website Address"
@@ -221,7 +221,7 @@
                 />
             <EditText
                 android:inputType="textMultiLine"
-                android:id="@+id/address"
+                android:id="@+id/edi_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Address"
@@ -236,7 +236,7 @@
 
 
             <Button
-                android:id="@+id/btn_enter"
+                android:id="@+id/edi_btn_enter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
