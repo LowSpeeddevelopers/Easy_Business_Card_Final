@@ -16,10 +16,10 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".Activity.ViewActivity"></activity>
         <activity android:name=".Activity.InfromationActivity" />
-        <activity android:name=".Activity.SplashActivity">
+        <activity android:name=".Activity.MainActivity">
 
         </activity>
-        <activity android:name=".Activity.MainActivity" >
+        <activity android:name=".Activity.SplashActivity" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
