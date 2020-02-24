@@ -2,6 +2,9 @@ package com.nexttech.easybusinesscard.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,8 +14,12 @@ import android.widget.Toast;
 import com.nexttech.easybusinesscard.R;
 
 public class ViewActivity extends AppCompatActivity {
+
     private ImageView imageFront, imageBack;
     Button btnSave,btnShare;
+
+    Drawable imageResourceFront, imageResourceBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,15 +33,18 @@ public class ViewActivity extends AppCompatActivity {
         String temp=getIntent().getStringExtra("template");
 
         if (temp.equals("temp1")){
-            imageFront.setImageDrawable(getResources().getDrawable(R.drawable.temp1_front));
-            imageBack.setImageDrawable(getResources().getDrawable(R.drawable.temp1_back));
+            imageResourceFront = getResources().getDrawable(R.drawable.temp1_front);
+            imageResourceBack = getResources().getDrawable(R.drawable.temp1_back);
         } else if (temp.equals("temp2")){
-            imageFront.setImageDrawable(getResources().getDrawable(R.drawable.temp2_front));
-            imageBack.setImageDrawable(getResources().getDrawable(R.drawable.temp2_back));
+            imageResourceFront = getResources().getDrawable(R.drawable.temp2_front);
+            imageResourceBack = getResources().getDrawable(R.drawable.temp2_back);
         } else if (temp.equals("temp3")){
-            imageFront.setImageDrawable(getResources().getDrawable(R.drawable.temp3_front));
-            imageBack.setImageDrawable(getResources().getDrawable(R.drawable.temp3_back));
+            imageResourceFront = getResources().getDrawable(R.drawable.temp3_front);
+            imageResourceBack = getResources().getDrawable(R.drawable.temp3_back);
         }
+
+        imageFront.setImageDrawable(imageResourceFront);
+        imageBack.setImageDrawable(imageResourceBack);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,5 +63,13 @@ public class ViewActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public Bitmap loadBitmapFromView(View v) {
+        Bitmap b = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(b);
+        v.layout(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
+        v.draw(c);
+        return b;
     }
 }
