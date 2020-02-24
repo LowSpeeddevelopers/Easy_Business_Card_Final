@@ -18,14 +18,16 @@
             <ImageView
                 android:id="@+id/image_front"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 />
             <ImageView
                 android:id="@+id/image_back"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 />

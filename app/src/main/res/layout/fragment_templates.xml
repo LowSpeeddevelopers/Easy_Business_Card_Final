@@ -10,25 +10,87 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="0dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/employee"
-                android:layout_weight="1"
-                />
-            <View
-                android:layout_width="5dp"
-                android:layout_height="0dp"
-                />
-            <ImageView
-                android:layout_width="0dp"
+                android:padding="8dp"
+                android:orientation="horizontal"
+                android:id="@+id/temp1">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/temp1_front"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+                    />
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="0dp"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/temp1_back"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/employee"
-                />
+                android:padding="8dp"
+                android:orientation="horizontal"
+                android:id="@+id/temp2">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/temp2_front"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+                    />
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="0dp"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/temp2_back"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:orientation="horizontal"
+                android:id="@+id/temp3">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/temp3_front"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+                    />
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="0dp"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/temp3_back"
+                    />
+            </LinearLayout>
 
         </LinearLayout>
 
