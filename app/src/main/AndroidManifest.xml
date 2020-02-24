@@ -5,6 +5,7 @@
     package="com.nexttech.easybusinesscard">
 
     <dist:module dist:instant="true" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"

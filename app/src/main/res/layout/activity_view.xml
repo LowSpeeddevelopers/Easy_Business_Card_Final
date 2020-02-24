@@ -21,7 +21,6 @@
                 android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:src=""
                 />
             <ImageView
                 android:id="@+id/image_back"
@@ -29,7 +28,6 @@
                 android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:src=""
                 />
             <LinearLayout
                 android:layout_width="match_parent"
