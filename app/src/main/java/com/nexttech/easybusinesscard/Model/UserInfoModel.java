@@ -1,6 +1,6 @@
 package com.nexttech.easybusinesscard.Model;
 
-public class CardInfoModel {
+public class UserInfoModel {
     private String name;
     private String designation;
     private String project;
@@ -12,10 +12,10 @@ public class CardInfoModel {
     private String website;
     private String address;
 
-    public CardInfoModel() {
+    public UserInfoModel() {
     }
 
-    public CardInfoModel(String name, String designation, String project, String companyName, String email, String phone, String fax, String mobile, String website, String address) {
+    public UserInfoModel(String name, String designation, String project, String companyName, String email, String phone, String fax, String mobile, String website, String address) {
         this.name = name;
         this.designation = designation;
         this.project = project;

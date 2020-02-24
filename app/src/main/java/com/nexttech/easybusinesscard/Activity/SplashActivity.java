@@ -14,12 +14,20 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.nexttech.easybusinesscard.DB.BusinessCardDb;
+import com.nexttech.easybusinesscard.Model.UserInfoModel;
 import com.nexttech.easybusinesscard.R;
+
+import java.util.ArrayList;
 
 public class SplashActivity extends AppCompatActivity {
     ImageView imageView;
 
     TextView textView;
+
+    BusinessCardDb businessCardDb;
+    ArrayList<UserInfoModel> userData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +42,18 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashActivity.this,MainActivity.class);
+                businessCardDb = new BusinessCardDb(SplashActivity.this);
+
+                userData = businessCardDb.getUserData();
+
+                Intent i;
+
+                if (userData.size()>0){
+                    i = new Intent(SplashActivity.this,MainActivity.class);
+                } else {
+                    i = new Intent(SplashActivity.this,InformationActivity.class);
+                }
+
                 startActivity(i);
                 finish();
             }

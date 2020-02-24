@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.nexttech.easybusinesscard.Model.CardInfoModel;
+import com.nexttech.easybusinesscard.Model.UserInfoModel;
 import com.nexttech.easybusinesscard.R;
 
 import java.util.ArrayList;
@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<CardInfoModel> cardList;
+    ArrayList<UserInfoModel> cardList;
 
-    public CardListAdapter(Context context, ArrayList<CardInfoModel> cardList) {
+    public CardListAdapter(Context context, ArrayList<UserInfoModel> cardList) {
         this.context = context;
         this.cardList = cardList;
     }
@@ -34,7 +34,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CardInfoModel model = cardList.get(position);
+        UserInfoModel model = cardList.get(position);
 
         holder.itemName.setText(model.getName());
         holder.itemDesignation.setText(model.getDesignation());

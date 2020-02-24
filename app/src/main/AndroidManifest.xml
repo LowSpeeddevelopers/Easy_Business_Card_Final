@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".Activity.ViewActivity"/>
-        <activity android:name=".Activity.InfromationActivity" />
+        <activity android:name=".Activity.InformationActivity" />
         <activity android:name=".Activity.MainActivity"
             android:theme="@style/NoActionBar">
 

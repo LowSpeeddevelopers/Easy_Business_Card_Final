@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.nexttech.easybusinesscard.Adapter.CardListAdapter;
-import com.nexttech.easybusinesscard.Model.CardInfoModel;
+import com.nexttech.easybusinesscard.Model.UserInfoModel;
 import com.nexttech.easybusinesscard.R;
 
 import java.util.ArrayList;
@@ -38,9 +38,9 @@ public class CollectonsFragment extends Fragment {
         rvCardList.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCardList.setHasFixedSize(true);
 
-        ArrayList<CardInfoModel> cardList = new ArrayList<>();
+        ArrayList<UserInfoModel> cardList = new ArrayList<>();
 
-        cardList.add(new CardInfoModel("Afroz Hossain", "Nai", "Jani na", "haray gase", "afroz.nero@gmail.com", "nai", "no", "01766226262", "www.nothing.com", "1234567"));
+        cardList.add(new UserInfoModel("Afroz Hossain", "Nai", "Jani na", "haray gase", "afroz.nero@gmail.com", "nai", "no", "01766226262", "www.nothing.com", "1234567"));
 
         CardListAdapter adapter = new CardListAdapter(getContext(), cardList);
 

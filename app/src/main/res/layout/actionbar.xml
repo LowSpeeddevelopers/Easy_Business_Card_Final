@@ -22,6 +22,7 @@
         <ImageView
             android:layout_width="32dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
             android:src="@drawable/back"
             android:id="@+id/backbutton"/>
         <TextView

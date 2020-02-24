@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".Activity.InformationActivity">
+
+    <include layout="@layout/actionbar"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,7 +26,7 @@
             >
 
             <EditText
-                android:id="@+id/edi_name"
+                android:id="@+id/edt_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Name"
@@ -34,7 +40,7 @@
 
                 />
             <EditText
-                android:id="@+id/edi_designation"
+                android:id="@+id/edt_designation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Designation"
@@ -47,7 +53,7 @@
                 />
 
             <EditText
-                android:id="@+id/edi_division"
+                android:id="@+id/edt_division"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -59,7 +65,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/edi_company_name"
+                android:id="@+id/edt_company_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ministry/Company Name"
@@ -71,11 +77,11 @@
                 android:layout_marginBottom="16dp"
                 />
             <EditText
-                android:id="@+id/edi_email"
+                android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
-                android:inputType="textPassword"
+                android:inputType="textEmailAddress"
                 android:textColor="#000"
                 android:textSize="20sp"
                 android:textAlignment="center"
@@ -110,7 +116,7 @@
 
 
                 <EditText
-                    android:id="@+id/edi_phone"
+                    android:id="@+id/edt_phone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
@@ -151,7 +157,7 @@
 
 
                 <EditText
-                    android:id="@+id/edi_fax"
+                    android:id="@+id/edt_fax"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
@@ -192,7 +198,7 @@
 
 
                 <EditText
-                    android:id="@+id/edi_mobile"
+                    android:id="@+id/edt_mobile"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
@@ -207,7 +213,7 @@
 
             </LinearLayout>
             <EditText
-                android:id="@+id/edi_web_address"
+                android:id="@+id/edt_web_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Website Address"
@@ -220,8 +226,8 @@
                 android:layout_marginBottom="5dp"
                 />
             <EditText
+                android:id="@+id/edt_address"
                 android:inputType="textMultiLine"
-                android:id="@+id/edi_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Address"
@@ -236,7 +242,7 @@
 
 
             <Button
-                android:id="@+id/edi_btn_enter"
+                android:id="@+id/btn_enter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
