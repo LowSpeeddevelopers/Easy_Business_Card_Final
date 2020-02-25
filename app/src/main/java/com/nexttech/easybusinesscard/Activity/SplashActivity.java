@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
     TextView textView;
 
     BusinessCardDb businessCardDb;
-    ArrayList<UserInfoModel> userData;
+    UserInfoModel userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 Intent i;
 
-                if (userData.size()>0){
+                if (userData!=null){
                     i = new Intent(SplashActivity.this,MainActivity.class);
                 } else {
                     i = new Intent(SplashActivity.this,InformationActivity.class);

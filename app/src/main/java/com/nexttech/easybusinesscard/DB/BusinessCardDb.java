@@ -39,8 +39,8 @@ public class BusinessCardDb extends DbHelper {
         db.close();
     }
 
-    public ArrayList<UserInfoModel> getUserData(){
-        ArrayList<UserInfoModel> data = new ArrayList<>();
+    public UserInfoModel getUserData(){
+        UserInfoModel model = null;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.query(MY_INFO_TABLE_NAME,null,null,null,null,null,null);
         while (c.moveToNext()){
@@ -56,13 +56,12 @@ public class BusinessCardDb extends DbHelper {
             String website = c.getString(c.getColumnIndex(MY_INFO_COL_WEBSITE));
             String address = c.getString(c.getColumnIndex(MY_INFO_COL_ADDRESS));
 
-            UserInfoModel model = new UserInfoModel(name, designation, project, company_name, email, phone, fax, mobile, website, address);
-            data.add(model);
+            model = new UserInfoModel(name, designation, project, company_name, email, phone, fax, mobile, website, address);
         }
 
         db.close();
         c.close();
-        return data;
+        return model;
     }
 
 }
