@@ -2,6 +2,8 @@ package com.nexttech.easybusinesscard.Activity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,22 +22,25 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
     TextView titleview;
+    ImageView backbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
         titleview = toolbar.findViewById(R.id.titletext);
-
         bottomNavigation = findViewById(R.id.bottom_navigation);
+        backbutton = toolbar.findViewById(R.id.backbutton);
+
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.super.onBackPressed();
+            }
+        });
 
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         openFragment(new TemplatesFragment());

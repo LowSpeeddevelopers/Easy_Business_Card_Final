@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class InformationActivity extends AppCompatActivity {
     Button btnEnter;
 
     BusinessCardDb businessCardDb;
+    ImageView back,option;
 
     TextView titleview;
 
@@ -40,7 +42,12 @@ public class InformationActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         titleview = toolbar.findViewById(R.id.titletext);
+        back=toolbar.findViewById(R.id.backbutton);
+        option = toolbar.findViewById(R.id.navbutton);
+        back.setVisibility(View.GONE);
+        option.setVisibility(View.GONE);
         titleview.setText("User Information");
+
 
         edtName=findViewById(R.id.edt_name);
         edtDesignation=findViewById(R.id.edt_designation);
