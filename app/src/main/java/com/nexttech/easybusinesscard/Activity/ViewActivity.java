@@ -1,7 +1,8 @@
 package com.nexttech.easybusinesscard.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,21 +11,26 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.internal.VisibilityAwareImageButton;
 import com.nexttech.easybusinesscard.R;
 
 import java.util.zip.Inflater;
 
 public class ViewActivity extends AppCompatActivity {
 
-    private ImageView imageFront, imageBack;
+
     Button btnSave,btnShare;
 
     View dialogueView;
@@ -36,8 +42,7 @@ public class ViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
 
-        imageFront=findViewById(R.id.image_front);
-        imageBack=findViewById(R.id.image_back);
+
         btnSave=findViewById(R.id.btnSave);
         btnShare=findViewById(R.id.btnShare);
 
@@ -55,44 +60,19 @@ public class ViewActivity extends AppCompatActivity {
         }
 
 
-        dialogueView =getLayoutInflater().inflate(R.layout.activity_view, null);
-//        ImageView cardBackgroundFront;
-//        TextView cardName, cardDesignation, cardMobile;
-//        cardBackgroundFront = dialogueView.findViewById(R.id.card_front_background);
-//        cardName= dialogueView.findViewById(R.id.card_name);
-//        cardDesignation= dialogueView.findViewById(R.id.card_designation);
-//        cardMobile= dialogueView.findViewById(R.id.card_mobile);
-//
-//        cardBackgroundFront.setImageDrawable(imageResourceFront);
-//
-//        cardName.setText("Abcd");
-//        cardDesignation.setText("efgh");
-//        cardMobile.setText("23456");
 
+        //View vi = getLayoutInflater().inflate(R.layout.business_card_front,null);
+        View vi = LayoutInflater.from(this).inflate(R.layout.business_card_front,null);
 
-        dialogueView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                dialogueView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                dialogueView.getHeight(); //height is ready
-
-                Log.e("something","something");
-                Log.e("height",String.valueOf(dialogueView.getHeight()));
-                Log.e("width",String.valueOf(dialogueView.getWidth()));
-                imageFront.setImageBitmap(loadBitmapFromView(dialogueView));
-            }
-        });
+        LinearLayout linearLayout = findViewById(R.id.linearlayout);
+        if(vi.getParent() != null) {
+            ((ViewGroup)vi.getParent()).removeView(vi); // <- fix
+        }
+        linearLayout.addView(vi);
 
 
 
-        imageBack.setImageDrawable(imageResourceBack);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        }, 1000);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override

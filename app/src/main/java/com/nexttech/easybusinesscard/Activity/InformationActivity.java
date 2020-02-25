@@ -78,46 +78,48 @@ public class InformationActivity extends AppCompatActivity {
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
 
-                if(name.equals("") || name.equals(null)) {
+                if(TextUtils.isEmpty(name)) {
                     edtName.setError("Username can't be empty");
-                    return;
+                    edtName.requestFocus();
+                    edtName.setCursorVisible(true);
 
-                } else if (designation.equals("") || designation.equals(null)){
+                } else if (TextUtils.isEmpty(designation)){
                     edtDesignation.setError("Please enter a designation");
-                    return;
+                    edtDesignation.requestFocus();
+                    edtDesignation.setCursorVisible(true);
 
-                } else if (project.equals("") || project.equals(null)) {
+                } else if (TextUtils.isEmpty(project)) {
                     edtDivision.setError("Please enter a Division");
-                    return;
+                    edtDivision.requestFocus();
+                    edtDivision.setCursorVisible(true);
 
-                } else if (companyName.equals("") || companyName.equals(null)) {
+                } else if (TextUtils.isEmpty(companyName)) {
                     edtCompanyName.setError("Please enter a Company Name");
-                    return;
+                    edtCompanyName.requestFocus();
+                    edtCompanyName.setCursorVisible(true);
 
-                }else if (email.equals("") || email.equals(null)||!email.matches(emailPattern)) {
+                }else if (TextUtils.isEmpty(email)||!email.matches(emailPattern)) {
                     edtEmail.setError("Please enter right email Address");
-                    return;
+                    edtEmail.requestFocus();
+                    edtEmail.setCursorVisible(true);
 
                 }
-                else if (phone.equals("") || phone.equals(null)) {
+                else if (TextUtils.isEmpty(phone)) {
                     edtPhone.setError("Please enter a valid phone number");
-                    return;
+                    edtPhone.requestFocus();
+                    edtPhone.setCursorVisible(true);
 
                 }else if (fax.equals("") || fax.equals(null)) {
                     edtFax.setError("Please enter a fax number");
-                    return;
 
                 }else if (mobile.equals("") || mobile.equals(null)) {
                     edtMobile.setError("Enter a valid mobile number");
-                    return;
 
                 }else if (web.equals("") || web.equals(null)) {
                     edtWebAddress.setError("Please enter a Web Address");
-                    return;
 
                 }else if (address.equals("") || address.equals(null)) {
                     edtAddress.setError("Please enter a Address");
-                    return;
                 } else {
                     UserInfoModel model = new UserInfoModel(name, designation, project, companyName, email, phone, fax, mobile, web, address);
 
