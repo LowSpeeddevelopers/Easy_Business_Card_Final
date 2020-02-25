@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    app:cardBackgroundColor="@color/color_actionbar"
+    app:cardCornerRadius="20dp"
+    android:layout_height="wrap_content"
+    app:cardPreventCornerOverlap="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save Dialog"
+            android:textColor="@color/color_notificationbar"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"
+            android:textSize="26sp"
+            android:layout_gravity="center"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_front"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="Card"
+                android:background="@drawable/button_background_shape"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:textSize="18dp"/>
+
+            <View
+                android:layout_width="25dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_back"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="QRCode"
+                android:background="@drawable/button_background_shape"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:textSize="18dp"/>
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="Cancel"
+            android:textSize="18dp"
+            android:padding="10dp"
+            android:layout_gravity="right"
+            android:textColor="@color/color_notificationbar"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
