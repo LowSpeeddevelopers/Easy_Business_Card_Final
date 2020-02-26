@@ -3,12 +3,14 @@ package com.nexttech.easybusinesscard.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
     TextView titleview;
     ImageView backbutton;
+    CardView home,setting, privacy_policy,help,about;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,43 @@ public class MainActivity extends AppCompatActivity {
         titleview = toolbar.findViewById(R.id.titletext);
         bottomNavigation = findViewById(R.id.bottom_navigation);
         backbutton = toolbar.findViewById(R.id.backbutton);
+        home = findViewById(R.id.button_home);
+        setting = findViewById(R.id.button_setting);
+        privacy_policy = findViewById(R.id.button_privacy);
+        help = findViewById(R.id.button_help);
+        about = findViewById(R.id.button_about_us);
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        privacy_policy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,4 +113,5 @@ public class MainActivity extends AppCompatActivity {
                     return false;
                 }
             };
+
 }
