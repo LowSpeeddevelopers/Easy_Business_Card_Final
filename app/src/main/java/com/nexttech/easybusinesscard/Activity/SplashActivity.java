@@ -1,24 +1,19 @@
 package com.nexttech.easybusinesscard.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.nexttech.easybusinesscard.DB.BusinessCardDb;
 import com.nexttech.easybusinesscard.Model.UserInfoModel;
 import com.nexttech.easybusinesscard.R;
-
-import java.util.ArrayList;
 
 public class SplashActivity extends AppCompatActivity {
     ImageView imageView;
