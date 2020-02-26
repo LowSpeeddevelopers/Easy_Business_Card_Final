@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nexttech.easybusinesscard.DB.BusinessCardDb;
@@ -33,6 +34,10 @@ public class ViewActivity extends AppCompatActivity {
     BusinessCardDb businessCardDb;
     UserInfoModel userData;
 
+    View dialogueView;
+    AlertDialog.Builder builder;
+    AlertDialog alertDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +48,7 @@ public class ViewActivity extends AppCompatActivity {
 
         btnSave=findViewById(R.id.btnSave);
         btnShare=findViewById(R.id.btnShare);
+        builder = new AlertDialog.Builder(ViewActivity.this);
 
         String temp=getIntent().getStringExtra("template");
 
@@ -94,6 +100,20 @@ public class ViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ViewActivity.this, "Save", Toast.LENGTH_SHORT).show();
+                dialogueView = getLayoutInflater().inflate(R.layout.share_dialoguebox, null);
+                TextView savediologue, card,qrcode, cancel;
+                savediologue = dialogueView.findViewById(R.id.tv_save_dialog);
+                card= dialogueView.findViewById(R.id.tv_card);
+                qrcode = dialogueView.findViewById(R.id.tv_qrcode);
+                cancel = dialogueView.findViewById(R.id.tv_cancel);
+
+                builder.setView(null);
+                builder.setView(dialogueView);
+                alertDialog=builder.create();
+                alertDialog.setCanceledOnTouchOutside(true);
+                alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                alertDialogDismiss();
+                alertDialog.show();
             }
         });
 
@@ -116,4 +136,10 @@ public class ViewActivity extends AppCompatActivity {
         v.draw(c);
         return b;
     }
+    private void alertDialogDismiss(){
+        if (alertDialog.isShowing()){
+            alertDialog.dismiss();
+        }
+    }
 }
+
