@@ -2,9 +2,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/color_actionbar"
     app:cardCornerRadius="20dp"
-    android:layout_height="wrap_content"
     app:cardPreventCornerOverlap="false">
 
     <LinearLayout
@@ -14,7 +14,7 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/tv_save_dialog"
+            android:id="@+id/tv_dialog_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Save Dialog"
