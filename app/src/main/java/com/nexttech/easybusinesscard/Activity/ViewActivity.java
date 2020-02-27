@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.EnumMap;
 import java.util.List;
 
 import androidmads.library.qrgenearator.QRGContents;
@@ -73,6 +75,7 @@ public class ViewActivity extends AppCompatActivity {
     String temp;
 
     TextView tvDialogTitle, tvCard, tvQrCode, tvCancel;
+    JSONObject qrData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,158 +89,282 @@ public class ViewActivity extends AppCompatActivity {
         btnShare=findViewById(R.id.btnShare);
         builder = new AlertDialog.Builder(ViewActivity.this);
 
+
         activity = this;
 
-        temp=getIntent().getStringExtra("template");
+        if(getIntent().hasExtra("data")){
+            Log.e("data","found");
+            if(getIntent().getStringExtra("data")!=null){
+                Log.e("data","available");
+                try {
+                    qrData = new JSONObject(getIntent().getStringExtra("data"));
+                    if (qrData.has("name") &&
+                            qrData.has("designation") &&
+                            qrData.has("project") &&
+                            qrData.has("companyName") &&
+                            qrData.has("email") &&
+                            qrData.has("phone") &&
+                            qrData.has("fax") &&
+                            qrData.has("mobile") &&
+                            qrData.has("website") &&
+                            qrData.has("address")&&
+                            qrData.has("template")) {
+                        setUpAsOtherUser();
+                    }else {
+                        Toast.makeText(activity, "This is not a valid Data!", Toast.LENGTH_SHORT).show();
+                    }
 
-        assert temp != null;
-        switch (temp) {
-            case "temp1":
-                imageResourceFront = getResources().getDrawable(R.drawable.temp1_front);
-                imageResourceBack = getResources().getDrawable(R.drawable.temp1_back);
-                break;
-            case "temp2":
-                imageResourceFront = getResources().getDrawable(R.drawable.temp2_front);
-                imageResourceBack = getResources().getDrawable(R.drawable.temp2_back);
-                break;
-            case "temp3":
-                imageResourceFront = getResources().getDrawable(R.drawable.temp3_front);
-                imageResourceBack = getResources().getDrawable(R.drawable.temp3_back);
-                break;
+
+                }catch (JSONException e){
+                    Toast.makeText(activity, "Unknown Data Type!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        }else {
+
+
+            temp=getIntent().getStringExtra("template");
+
+            assert temp != null;
+            switch (temp) {
+                case "temp1":
+                    imageResourceFront = getResources().getDrawable(R.drawable.temp1_front);
+                    imageResourceBack = getResources().getDrawable(R.drawable.temp1_back);
+                    break;
+                case "temp2":
+                    imageResourceFront = getResources().getDrawable(R.drawable.temp2_front);
+                    imageResourceBack = getResources().getDrawable(R.drawable.temp2_back);
+                    break;
+                case "temp3":
+                    imageResourceFront = getResources().getDrawable(R.drawable.temp3_front);
+                    imageResourceBack = getResources().getDrawable(R.drawable.temp3_back);
+                    break;
+            }
+
+
+            View vi = LayoutInflater.from(this).inflate(R.layout.business_card_front,null);
+
+            cardFrontBackground = vi.findViewById(R.id.card_front_background);
+            cardBackBackground = vi.findViewById(R.id.card_back_background);
+            cardName = vi.findViewById(R.id.card_name);
+            cardDesignation = vi.findViewById(R.id.card_designation);
+            cardMobile = vi.findViewById(R.id.card_mobile);
+            cardAddress = vi.findViewById(R.id.card_address);
+
+            cardFrontBackground.setImageDrawable(imageResourceFront);
+            cardBackBackground.setImageDrawable(imageResourceBack);
+
+            cardName.setText(userData.getName());
+            cardDesignation.setText(userData.getDesignation());
+            cardMobile.setText(userData.getMobile());
+            cardAddress.setText(userData.getAddress());
+
+            JSONObject myData = new JSONObject();
+            try {
+
+
+                String name = userData.getName();
+                String designation = userData.getDesignation();
+                String project = userData.getProject();
+                String companyName = userData.getCompanyName();
+                String email = userData.getEmail();
+                String phone = userData.getPhone();
+                String fax = userData.getFax();
+                String mobile = userData.getMobile();
+                String website = userData.getWebsite();
+                String address = userData.getAddress();
+
+
+
+                myData.put("name",name);
+                myData.put("designation",designation);
+                myData.put("project",project);
+                myData.put("companyName",companyName);
+                myData.put("email", email);
+                myData.put("phone",phone);
+                myData.put("fax",fax);
+                myData.put("mobile",mobile);
+                myData.put("website",website);
+                myData.put("address",address);
+                myData.put("template",temp);
+
+                Log.e("userdata",myData.toString());
+
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            qrCodeValue = myData.toString();
+
+            final LinearLayout linearLayout = findViewById(R.id.linearlayout);
+            if(vi.getParent() != null) {
+                ((ViewGroup)vi.getParent()).removeView(vi); // <- fix
+            }
+            linearLayout.addView(vi);
+
+            dialogueView = getLayoutInflater().inflate(R.layout.share_dialoguebox, null);
+
+            tvDialogTitle = dialogueView.findViewById(R.id.tv_dialog_title);
+            tvCard= dialogueView.findViewById(R.id.tv_card);
+            tvQrCode = dialogueView.findViewById(R.id.tv_qrcode);
+            tvCancel = dialogueView.findViewById(R.id.tv_cancel);
+
+            builder.setView(null);
+            builder.setView(dialogueView);
+
+            alertDialog=builder.create();
+            alertDialog.setCanceledOnTouchOutside(true);
+            alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+            tvCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialogDismiss();
+                }
+            });
+
+            btnSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    tvDialogTitle.setText("Save");
+
+                    tvCard.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Bitmap b = loadBitmapFromView(linearLayout);
+                                    saveImage(b, "MyCard-"+System.currentTimeMillis(), savePath+"/Cards/");
+                                }
+                            }, 1000);
+                        }
+                    });
+
+                    tvQrCode.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    saveImage(qrBitmap, "QrCode-"+System.currentTimeMillis(), savePath+"/Qr Code/");
+                                }
+                            }, 1000);
+                        }
+                    });
+
+                    alertDialogDismiss();
+                    alertDialog.show();
+                }
+            });
+
+            btnShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    tvDialogTitle.setText("Share");
+
+                    tvCard.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Bitmap b = loadBitmapFromView(linearLayout);
+                                    shareIntent(b);
+                                }
+                            }, 1000);
+                        }
+                    });
+
+                    tvQrCode.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    shareIntent(qrBitmap);
+                                }
+                            }, 1000);
+                        }
+                    });
+
+                    alertDialogDismiss();
+                    alertDialog.show();
+                }
+            });
+
+
+            generateQrCode();
         }
 
 
-        View vi = LayoutInflater.from(this).inflate(R.layout.business_card_front,null);
-
-        cardFrontBackground = vi.findViewById(R.id.card_front_background);
-        cardBackBackground = vi.findViewById(R.id.card_back_background);
-        cardName = vi.findViewById(R.id.card_name);
-        cardDesignation = vi.findViewById(R.id.card_designation);
-        cardMobile = vi.findViewById(R.id.card_mobile);
-        cardAddress = vi.findViewById(R.id.card_address);
-
-        cardFrontBackground.setImageDrawable(imageResourceFront);
-        cardBackBackground.setImageDrawable(imageResourceBack);
-
-        cardName.setText(userData.getName());
-        cardDesignation.setText(userData.getDesignation());
-        cardMobile.setText(userData.getMobile());
-        cardAddress.setText(userData.getAddress());
-
-        JSONObject myData = new JSONObject();
-        try {
-            myData.put("all_data",userData);
-            myData.put("template",temp);
-
-        } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        qrCodeValue = myData.toString();
-
-        final LinearLayout linearLayout = findViewById(R.id.linearlayout);
-        if(vi.getParent() != null) {
-            ((ViewGroup)vi.getParent()).removeView(vi); // <- fix
-        }
-        linearLayout.addView(vi);
-
-        dialogueView = getLayoutInflater().inflate(R.layout.share_dialoguebox, null);
-
-        tvDialogTitle = dialogueView.findViewById(R.id.tv_dialog_title);
-        tvCard= dialogueView.findViewById(R.id.tv_card);
-        tvQrCode = dialogueView.findViewById(R.id.tv_qrcode);
-        tvCancel = dialogueView.findViewById(R.id.tv_cancel);
-
-        builder.setView(null);
-        builder.setView(dialogueView);
-
-        alertDialog=builder.create();
-        alertDialog.setCanceledOnTouchOutside(true);
-        alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
-        tvCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                alertDialogDismiss();
-            }
-        });
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                tvDialogTitle.setText("Save");
-
-                tvCard.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                Bitmap b = loadBitmapFromView(linearLayout);
-                                saveImage(b, "MyCard-"+System.currentTimeMillis(), savePath+"/Cards/");
-                            }
-                        }, 1000);
-                    }
-                });
-
-                tvQrCode.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                saveImage(qrBitmap, "QrCode-"+System.currentTimeMillis(), savePath+"/Qr Code/");
-                            }
-                        }, 1000);
-                    }
-                });
-
-                alertDialogDismiss();
-                alertDialog.show();
-            }
-        });
-
-        btnShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tvDialogTitle.setText("Share");
-
-                tvCard.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                Bitmap b = loadBitmapFromView(linearLayout);
-                                shareIntent(b);
-                            }
-                        }, 1000);
-                    }
-                });
-
-                tvQrCode.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                shareIntent(qrBitmap);
-                            }
-                        }, 1000);
-                    }
-                });
-
-                alertDialogDismiss();
-                alertDialog.show();
-            }
-        });
-
-
-        generateQrCode();
 
     }
+
+    void setUpAsOtherUser(){
+
+
+        Log.e("debugging","here");
+
+        try {
+            String template = qrData.getString("template");
+            String name = qrData.getString("name");
+            String design = qrData.getString("designation");
+            String mobile = qrData.getString("mobile");
+            String address = qrData.getString("address");
+
+            Log.e("debugging",qrData.toString());
+            switch (template) {
+                case "temp1":
+                    imageResourceFront = getResources().getDrawable(R.drawable.temp1_front);
+                    imageResourceBack = getResources().getDrawable(R.drawable.temp1_back);
+                    break;
+                case "temp2":
+                    imageResourceFront = getResources().getDrawable(R.drawable.temp2_front);
+                    imageResourceBack = getResources().getDrawable(R.drawable.temp2_back);
+                    break;
+                case "temp3":
+                    imageResourceFront = getResources().getDrawable(R.drawable.temp3_front);
+                    imageResourceBack = getResources().getDrawable(R.drawable.temp3_back);
+                    break;
+            }
+
+
+
+            View vi = LayoutInflater.from(this).inflate(R.layout.business_card_front,null);
+
+            cardFrontBackground = vi.findViewById(R.id.card_front_background);
+            cardBackBackground = vi.findViewById(R.id.card_back_background);
+            cardName = vi.findViewById(R.id.card_name);
+            cardDesignation = vi.findViewById(R.id.card_designation);
+            cardMobile = vi.findViewById(R.id.card_mobile);
+            cardAddress = vi.findViewById(R.id.card_address);
+
+            cardFrontBackground.setImageDrawable(imageResourceFront);
+            cardBackBackground.setImageDrawable(imageResourceBack);
+
+
+            cardName.setText(name);
+            cardDesignation.setText(design);
+            cardMobile.setText(mobile);
+            cardAddress.setText(address);
+
+
+
+            final LinearLayout linearLayout = findViewById(R.id.linearlayout);
+            if(vi.getParent() != null) {
+                ((ViewGroup)vi.getParent()).removeView(vi); // <- fix
+            }
+            linearLayout.addView(vi);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void generateQrCode() {
 
@@ -248,7 +375,7 @@ public class ViewActivity extends AppCompatActivity {
             display.getSize(point);
             int width = point.x;
             int height = point.y;
-            int smallerDimension = width < height ? width : height;
+            int smallerDimension = Math.min(width, height);
             smallerDimension = smallerDimension * 3 / 4;
 
             qrgEncoder = new QRGEncoder(
@@ -316,7 +443,6 @@ public class ViewActivity extends AppCompatActivity {
         revokeUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
         return uri;
     }
-
     private void alertDialogDismiss(){
         if (alertDialog.isShowing()){
             alertDialog.dismiss();

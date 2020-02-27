@@ -2,10 +2,14 @@ package com.nexttech.easybusinesscard.Fragments;
 
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,34 +27,44 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.nexttech.easybusinesscard.Activity.MainActivity;
+import com.nexttech.easybusinesscard.Activity.ViewActivity;
 import com.nexttech.easybusinesscard.R;
 
 public class ScanFragment extends Fragment {
     CodeScanner codeScanner;
     CodeScannerView scannView;
-    TextView resultData;
+     String scannedvalue;
 
 
-    public ScanFragment() {
+
+    Context context;
+    public ScanFragment(Context context) {
+        this.context = context;
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_scan, container, false);
         scannView = view.findViewById(R.id.scannerView);
-        codeScanner = new CodeScanner(getContext(),scannView);
-        resultData = view.findViewById(R.id.resultsOfQr);
+        codeScanner = new CodeScanner(context,scannView);
+
+
 
         codeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(@NonNull final Result result) {
 
-                getActivity().runOnUiThread(new Runnable() {
+                ((Activity)context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        resultData.setText(result.getText());
+                        scannedvalue = result.getText();
+                        Intent i =new Intent(context,ViewActivity.class);
+                        i.putExtra("data",scannedvalue);
+                        startActivity(i);
+
                     }
                 });
 

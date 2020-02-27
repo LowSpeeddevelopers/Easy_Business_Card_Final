@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                             titleview.setText("Templates");
                             return true;
                         case R.id.navigation_scan:
-                            openFragment(new ScanFragment());
+                            openFragment(new ScanFragment(MainActivity.this));
                             titleview.setText("Scan");
                             return true;
                         case R.id.navigation_collections:
