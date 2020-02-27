@@ -1,5 +1,6 @@
 package com.nexttech.easybusinesscard.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
     TextView titleview;
-    ImageView backbutton;
+    public static ImageView backbutton;
+    public static ImageView navbutton;
     CardView home,setting, privacy_policy,help,about;
 
     @Override
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         privacy_policy = findViewById(R.id.button_privacy);
         help = findViewById(R.id.button_help);
         about = findViewById(R.id.button_about_us);
+        navbutton = toolbar.findViewById(R.id.navbutton);
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.super.onBackPressed();
+               startActivity(new Intent(MainActivity.this,InformationActivity.class));
             }
         });
 
@@ -98,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.navigation_card:
+                            navbutton.setVisibility(View.VISIBLE);
+                            backbutton.setVisibility(View.VISIBLE);
                             openFragment(new TemplatesFragment());
                             titleview.setText("Templates");
                             return true;
@@ -106,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
                             titleview.setText("Scan");
                             return true;
                         case R.id.navigation_collections:
+                            navbutton.setVisibility(View.GONE);
+                            backbutton.setVisibility(View.GONE);
                             openFragment(new CollectonsFragment());
                             titleview.setText("Collections");
                             return true;

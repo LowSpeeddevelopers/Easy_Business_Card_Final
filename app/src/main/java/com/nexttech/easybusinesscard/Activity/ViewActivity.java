@@ -39,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.List;
 
 import androidmads.library.qrgenearator.QRGContents;
@@ -279,6 +280,10 @@ public class ViewActivity extends AppCompatActivity {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
                 try {
+                    File file = new File(filePath);
+                    if(!file.exists()){
+                        file.mkdirs();
+                    }
                     boolean save = new QRGSaver().save(filePath, fileName, b, QRGContents.ImageType.IMAGE_PNG);
                     String result = save ? "Image Saved" : "Image Not Saved";
                     Toast.makeText(activity, result, Toast.LENGTH_LONG).show();

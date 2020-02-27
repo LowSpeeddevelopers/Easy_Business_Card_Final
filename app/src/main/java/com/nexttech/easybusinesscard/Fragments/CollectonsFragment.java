@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.nexttech.easybusinesscard.Activity.MainActivity;
 import com.nexttech.easybusinesscard.Adapter.CardListAdapter;
 import com.nexttech.easybusinesscard.Model.UserInfoModel;
 import com.nexttech.easybusinesscard.R;
@@ -26,6 +27,17 @@ public class CollectonsFragment extends Fragment {
     public CollectonsFragment() {
     }
 
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if(isVisibleToUser){
+            MainActivity.backbutton.setVisibility(View.GONE);
+            MainActivity.navbutton.setVisibility(View.GONE);
+        }
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

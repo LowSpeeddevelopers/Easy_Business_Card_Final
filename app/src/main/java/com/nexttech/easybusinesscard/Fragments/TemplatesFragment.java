@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.nexttech.easybusinesscard.Activity.MainActivity;
 import com.nexttech.easybusinesscard.Activity.ViewActivity;
 import com.nexttech.easybusinesscard.R;
 
@@ -23,9 +24,13 @@ public class TemplatesFragment extends Fragment {
     public TemplatesFragment() {
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         View view = inflater.inflate(R.layout.fragment_templates, container, false);
 
         temp1=view.findViewById(R.id.temp1);
