@@ -34,7 +34,7 @@ import com.nexttech.easybusinesscard.R;
 public class ScanFragment extends Fragment {
     CodeScanner codeScanner;
     CodeScannerView scannView;
-     String scannedvalue;
+    String scannedvalue;
 
 
 
@@ -86,7 +86,12 @@ public class ScanFragment extends Fragment {
     public void onResume() {
         super.onResume();
         requestForCamera();
+    }
 
+    @Override
+    public void onPause() {
+        codeScanner.releaseResources();
+        super.onPause();
     }
 
     public void requestForCamera() {

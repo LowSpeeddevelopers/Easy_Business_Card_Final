@@ -14,6 +14,8 @@ import android.widget.EditText;
 
 import com.nexttech.easybusinesscard.Activity.MainActivity;
 import com.nexttech.easybusinesscard.Adapter.CardListAdapter;
+import com.nexttech.easybusinesscard.DB.BusinessCardDb;
+import com.nexttech.easybusinesscard.Model.CollectionCardModel;
 import com.nexttech.easybusinesscard.Model.UserInfoModel;
 import com.nexttech.easybusinesscard.R;
 
@@ -23,6 +25,9 @@ public class CollectonsFragment extends Fragment {
 
     EditText edtSearch;
     RecyclerView rvCardList;
+
+    BusinessCardDb businessCardDb;
+    ArrayList<CollectionCardModel> cardCollections;
 
     public CollectonsFragment() {
     }
@@ -47,14 +52,14 @@ public class CollectonsFragment extends Fragment {
         edtSearch = view.findViewById(R.id.edt_search);
         rvCardList = view.findViewById(R.id.rv_card_list);
 
+        businessCardDb = new BusinessCardDb(getContext());
+
+        cardCollections = businessCardDb.getCardData();
+
         rvCardList.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCardList.setHasFixedSize(true);
 
-        ArrayList<UserInfoModel> cardList = new ArrayList<>();
-
-        cardList.add(new UserInfoModel("Afroz Hossain", "Nai", "Jani na", "haray gase", "afroz.nero@gmail.com", "nai", "no", "01766226262", "www.nothing.com", "1234567"));
-
-        CardListAdapter adapter = new CardListAdapter(getContext(), cardList);
+        CardListAdapter adapter = new CardListAdapter(getContext(), cardCollections);
 
         rvCardList.setAdapter(adapter);
 

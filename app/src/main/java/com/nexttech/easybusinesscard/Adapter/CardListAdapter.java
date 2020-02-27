@@ -1,6 +1,7 @@
 package com.nexttech.easybusinesscard.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nexttech.easybusinesscard.Activity.ViewActivity;
+import com.nexttech.easybusinesscard.Model.CollectionCardModel;
 import com.nexttech.easybusinesscard.Model.UserInfoModel;
 import com.nexttech.easybusinesscard.R;
 
@@ -17,9 +20,9 @@ import java.util.ArrayList;
 public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<UserInfoModel> cardList;
+    ArrayList<CollectionCardModel> cardList;
 
-    public CardListAdapter(Context context, ArrayList<UserInfoModel> cardList) {
+    public CardListAdapter(Context context, ArrayList<CollectionCardModel> cardList) {
         this.context = context;
         this.cardList = cardList;
     }
@@ -34,11 +37,20 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        UserInfoModel model = cardList.get(position);
+        final CollectionCardModel model = cardList.get(position);
 
         holder.itemName.setText(model.getName());
         holder.itemDesignation.setText(model.getDesignation());
         holder.itemCompanyName.setText(model.getCompanyName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i =new Intent(context, ViewActivity.class);
+                i.putExtra("user_id",model.getId());
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override

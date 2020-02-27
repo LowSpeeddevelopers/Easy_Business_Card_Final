@@ -33,6 +33,7 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.nexttech.easybusinesscard.DB.BusinessCardDb;
+import com.nexttech.easybusinesscard.Model.CollectionCardModel;
 import com.nexttech.easybusinesscard.Model.UserInfoModel;
 import com.nexttech.easybusinesscard.R;
 
@@ -61,6 +62,7 @@ public class ViewActivity extends AppCompatActivity {
 
     BusinessCardDb businessCardDb;
     UserInfoModel userData;
+    CollectionCardModel cardData;
 
     private String qrCodeValue;
     private String savePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Business Card/";
@@ -71,6 +73,8 @@ public class ViewActivity extends AppCompatActivity {
     View dialogueView;
     AlertDialog.Builder builder;
     AlertDialog alertDialog;
+
+    LinearLayout linearLayout;
 
     String temp;
 
@@ -83,14 +87,115 @@ public class ViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view);
 
         businessCardDb = new BusinessCardDb(ViewActivity.this);
-        userData = businessCardDb.getUserData();
 
         btnSave=findViewById(R.id.btnSave);
         btnShare=findViewById(R.id.btnShare);
         builder = new AlertDialog.Builder(ViewActivity.this);
 
-
         activity = this;
+
+        View vi = LayoutInflater.from(this).inflate(R.layout.business_card_front,null);
+
+        cardFrontBackground = vi.findViewById(R.id.card_front_background);
+        cardBackBackground = vi.findViewById(R.id.card_back_background);
+        cardName = vi.findViewById(R.id.card_name);
+        cardDesignation = vi.findViewById(R.id.card_designation);
+        cardMobile = vi.findViewById(R.id.card_mobile);
+        cardAddress = vi.findViewById(R.id.card_address);
+
+        dialogueView = getLayoutInflater().inflate(R.layout.share_dialoguebox, null);
+
+        linearLayout = findViewById(R.id.linearlayout);
+
+        tvDialogTitle = dialogueView.findViewById(R.id.tv_dialog_title);
+        tvCard= dialogueView.findViewById(R.id.tv_card);
+        tvQrCode = dialogueView.findViewById(R.id.tv_qrcode);
+        tvCancel = dialogueView.findViewById(R.id.tv_cancel);
+
+        builder.setView(null);
+        builder.setView(dialogueView);
+
+        alertDialog=builder.create();
+        alertDialog.setCanceledOnTouchOutside(true);
+        alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialogDismiss();
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                tvDialogTitle.setText("Save");
+
+                tvCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Bitmap b = loadBitmapFromView(linearLayout);
+                                saveImage(b, "MyCard-"+System.currentTimeMillis(), savePath+"/Cards/");
+                            }
+                        }, 1000);
+                    }
+                });
+
+                tvQrCode.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                saveImage(qrBitmap, "QrCode-"+System.currentTimeMillis(), savePath+"/Qr Code/");
+                            }
+                        }, 1000);
+                    }
+                });
+
+                alertDialogDismiss();
+                alertDialog.show();
+            }
+        });
+
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvDialogTitle.setText("Share");
+
+                tvCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Bitmap b = loadBitmapFromView(linearLayout);
+                                shareIntent(b);
+                            }
+                        }, 1000);
+                    }
+                });
+
+                tvQrCode.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                shareIntent(qrBitmap);
+                            }
+                        }, 1000);
+                    }
+                });
+
+                alertDialogDismiss();
+                alertDialog.show();
+            }
+        });
 
         if(getIntent().hasExtra("data")){
             Log.e("data","found");
@@ -120,10 +225,11 @@ public class ViewActivity extends AppCompatActivity {
                 }
             }
 
-        }else {
-
+        }else if(getIntent().hasExtra("template")) {
 
             temp=getIntent().getStringExtra("template");
+
+            userData = businessCardDb.getUserData();
 
             assert temp != null;
             switch (temp) {
@@ -141,15 +247,6 @@ public class ViewActivity extends AppCompatActivity {
                     break;
             }
 
-
-            View vi = LayoutInflater.from(this).inflate(R.layout.business_card_front,null);
-
-            cardFrontBackground = vi.findViewById(R.id.card_front_background);
-            cardBackBackground = vi.findViewById(R.id.card_back_background);
-            cardName = vi.findViewById(R.id.card_name);
-            cardDesignation = vi.findViewById(R.id.card_designation);
-            cardMobile = vi.findViewById(R.id.card_mobile);
-            cardAddress = vi.findViewById(R.id.card_address);
 
             cardFrontBackground.setImageDrawable(imageResourceFront);
             cardBackBackground.setImageDrawable(imageResourceBack);
@@ -197,103 +294,87 @@ public class ViewActivity extends AppCompatActivity {
 
             qrCodeValue = myData.toString();
 
-            final LinearLayout linearLayout = findViewById(R.id.linearlayout);
             if(vi.getParent() != null) {
                 ((ViewGroup)vi.getParent()).removeView(vi); // <- fix
             }
             linearLayout.addView(vi);
 
-            dialogueView = getLayoutInflater().inflate(R.layout.share_dialoguebox, null);
 
-            tvDialogTitle = dialogueView.findViewById(R.id.tv_dialog_title);
-            tvCard= dialogueView.findViewById(R.id.tv_card);
-            tvQrCode = dialogueView.findViewById(R.id.tv_qrcode);
-            tvCancel = dialogueView.findViewById(R.id.tv_cancel);
+            generateQrCode();
+        }else if(getIntent().hasExtra("user_id")) {
 
-            builder.setView(null);
-            builder.setView(dialogueView);
+            String id = getIntent().getStringExtra("user_id");
 
-            alertDialog=builder.create();
-            alertDialog.setCanceledOnTouchOutside(true);
-            alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            cardData = businessCardDb.getSingleCardData(id);
 
-            tvCancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    alertDialogDismiss();
-                }
-            });
+            Log.e("card",cardData.getCardTemplate());
 
-            btnSave.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            switch (cardData.getCardTemplate()) {
+                case "temp1":
+                    imageResourceFront = getResources().getDrawable(R.drawable.temp1_front);
+                    imageResourceBack = getResources().getDrawable(R.drawable.temp1_back);
+                    break;
+                case "temp2":
+                    imageResourceFront = getResources().getDrawable(R.drawable.temp2_front);
+                    imageResourceBack = getResources().getDrawable(R.drawable.temp2_back);
+                    break;
+                case "temp3":
+                    imageResourceFront = getResources().getDrawable(R.drawable.temp3_front);
+                    imageResourceBack = getResources().getDrawable(R.drawable.temp3_back);
+                    break;
+            }
 
-                    tvDialogTitle.setText("Save");
 
-                    tvCard.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Bitmap b = loadBitmapFromView(linearLayout);
-                                    saveImage(b, "MyCard-"+System.currentTimeMillis(), savePath+"/Cards/");
-                                }
-                            }, 1000);
-                        }
-                    });
+            cardFrontBackground.setImageDrawable(imageResourceFront);
+            cardBackBackground.setImageDrawable(imageResourceBack);
 
-                    tvQrCode.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    saveImage(qrBitmap, "QrCode-"+System.currentTimeMillis(), savePath+"/Qr Code/");
-                                }
-                            }, 1000);
-                        }
-                    });
+            cardName.setText(cardData.getName());
+            cardDesignation.setText(cardData.getDesignation());
+            cardMobile.setText(cardData.getMobile());
+            cardAddress.setText(cardData.getAddress());
 
-                    alertDialogDismiss();
-                    alertDialog.show();
-                }
-            });
+            JSONObject myData = new JSONObject();
+            try {
 
-            btnShare.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    tvDialogTitle.setText("Share");
 
-                    tvCard.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Bitmap b = loadBitmapFromView(linearLayout);
-                                    shareIntent(b);
-                                }
-                            }, 1000);
-                        }
-                    });
+                String name = cardData.getName();
+                String designation = cardData.getDesignation();
+                String project = cardData.getProject();
+                String companyName = cardData.getCompanyName();
+                String email = cardData.getEmail();
+                String phone = cardData.getPhone();
+                String fax = cardData.getFax();
+                String mobile = cardData.getMobile();
+                String website = cardData.getWebsite();
+                String address = cardData.getAddress();
 
-                    tvQrCode.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    shareIntent(qrBitmap);
-                                }
-                            }, 1000);
-                        }
-                    });
 
-                    alertDialogDismiss();
-                    alertDialog.show();
-                }
-            });
+
+                myData.put("name",name);
+                myData.put("designation",designation);
+                myData.put("project",project);
+                myData.put("companyName",companyName);
+                myData.put("email", email);
+                myData.put("phone",phone);
+                myData.put("fax",fax);
+                myData.put("mobile",mobile);
+                myData.put("website",website);
+                myData.put("address",address);
+                myData.put("template",temp);
+
+                Log.e("userdata",myData.toString());
+
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            qrCodeValue = myData.toString();
+
+            if(vi.getParent() != null) {
+                ((ViewGroup)vi.getParent()).removeView(vi); // <- fix
+            }
+            linearLayout.addView(vi);
 
 
             generateQrCode();
@@ -309,11 +390,22 @@ public class ViewActivity extends AppCompatActivity {
         Log.e("debugging","here");
 
         try {
-            String template = qrData.getString("template");
+
             String name = qrData.getString("name");
-            String design = qrData.getString("designation");
+            String designation = qrData.getString("designation");
+            String project = qrData.getString("project");
+            String companyName = qrData.getString("companyName");
+            String email = qrData.getString("email");
+            String phone = qrData.getString("phone");
+            String fax = qrData.getString("fax");
             String mobile = qrData.getString("mobile");
+            String website = qrData.getString("website");
             String address = qrData.getString("address");
+            String template = qrData.getString("template");
+
+            CollectionCardModel model = new CollectionCardModel(name, designation, project, companyName, email, phone, fax, mobile, website, address, template);
+
+            businessCardDb.insertOthersCardData(model);
 
             Log.e("debugging",qrData.toString());
             switch (template) {
@@ -347,13 +439,11 @@ public class ViewActivity extends AppCompatActivity {
 
 
             cardName.setText(name);
-            cardDesignation.setText(design);
+            cardDesignation.setText(designation);
             cardMobile.setText(mobile);
             cardAddress.setText(address);
 
 
-
-            final LinearLayout linearLayout = findViewById(R.id.linearlayout);
             if(vi.getParent() != null) {
                 ((ViewGroup)vi.getParent()).removeView(vi); // <- fix
             }
