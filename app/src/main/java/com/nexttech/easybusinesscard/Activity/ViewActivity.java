@@ -503,7 +503,7 @@ public class ViewActivity extends AppCompatActivity {
                     }
                     boolean save = new QRGSaver().save(filePath, fileName, b, QRGContents.ImageType.IMAGE_PNG);
                     String result = save ? "Image Saved" : "Image Not Saved";
-                    Toast.makeText(activity, result, Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, result, Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

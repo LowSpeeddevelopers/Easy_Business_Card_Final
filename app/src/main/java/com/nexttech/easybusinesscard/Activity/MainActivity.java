@@ -21,6 +21,8 @@ import com.nexttech.easybusinesscard.Fragments.ScanFragment;
 import com.nexttech.easybusinesscard.Fragments.TemplatesFragment;
 import com.nexttech.easybusinesscard.R;
 
+import java.lang.ref.WeakReference;
+
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     public static ImageView backbutton;
     public static ImageView navbutton;
     CardView home,setting, privacy_policy,help,about;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         help = findViewById(R.id.button_help);
         about = findViewById(R.id.button_about_us);
         navbutton = toolbar.findViewById(R.id.navbutton);
+
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,13 +91,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-        openFragment(new TemplatesFragment());
+        openFragment(new TemplatesFragment(),"Templates");
        titleview.setText("Templates");
     }
 
-    public void openFragment(Fragment fragment) {
+    public void openFragment(Fragment fragment,String tag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, fragment);
+        transaction.replace(R.id.container, fragment,tag);
         transaction.commit();
     }
 
@@ -103,17 +108,19 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.navigation_card:
                             navbutton.setVisibility(View.VISIBLE);
                             backbutton.setVisibility(View.VISIBLE);
-                            openFragment(new TemplatesFragment());
+                            openFragment(new TemplatesFragment(),"Templates");
                             titleview.setText("Templates");
                             return true;
                         case R.id.navigation_scan:
-                            openFragment(new ScanFragment(MainActivity.this));
+                            navbutton.setVisibility(View.GONE);
+                            backbutton.setVisibility(View.GONE);
+                            openFragment(new ScanFragment(MainActivity.this),"Scan");
                             titleview.setText("Scan");
                             return true;
                         case R.id.navigation_collections:
                             navbutton.setVisibility(View.GONE);
                             backbutton.setVisibility(View.GONE);
-                            openFragment(new CollectonsFragment());
+                            openFragment(new CollectonsFragment(),"Collections");
                             titleview.setText("Collections");
                             return true;
                     }
@@ -121,4 +128,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
+
+    @Override
+    public void onBackPressed() {
+        TemplatesFragment test = (TemplatesFragment) getSupportFragmentManager().findFragmentByTag("Templates");
+        if(test!=null && test.isVisible()){
+            super.onBackPressed();
+        }else {
+            openFragment(new TemplatesFragment(),"Templates");
+        }
+    }
 }
