@@ -42,6 +42,22 @@ public class BusinessCardDb extends DbHelper {
         db.close();
     }
 
+    public int updateUserData(UserInfoModel model){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DbHelper.COL_NAME, model.getName());
+        contentValues.put(DbHelper.COL_DESIGNATION, model.getDesignation());
+        contentValues.put(DbHelper.COL_PROJECT, model.getProject());
+        contentValues.put(DbHelper.COL_COMPANY_NAME, model.getCompanyName() );
+        contentValues.put(DbHelper.COL_EMAIL, model.getEmail());
+        contentValues.put(DbHelper.COL_PHONE, model.getPhone());
+        contentValues.put(DbHelper.COL_FAX, model.getFax());
+        contentValues.put(DbHelper.COL_MOBILE, model.getMobile());
+        contentValues.put(DbHelper.COL_WEBSITE, model.getWebsite());
+        contentValues.put(DbHelper.COL_ADDRESS, model.getAddress());
+        return db.update(DbHelper.MY_INFO_TABLE_NAME,contentValues,null,null);
+    }
+
     public UserInfoModel getUserData(){
         UserInfoModel model = null;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -145,6 +161,12 @@ public class BusinessCardDb extends DbHelper {
         db.close();
         c.close();
         return singleCardData;
+    }
+
+    public void deleteCardData(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(DbHelper.MY_CARDS_TABLE_NAME, DbHelper.COL_ID + "=" + id, null);
+
     }
 
 }

@@ -30,6 +30,10 @@ public class InformationActivity extends AppCompatActivity {
 
     TextView titleview;
 
+    UserInfoModel userData;
+
+    boolean registration;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,26 @@ public class InformationActivity extends AppCompatActivity {
         edtWebAddress=findViewById(R.id.edt_web_address);
         edtAddress=findViewById(R.id.edt_address);
         btnEnter=findViewById(R.id.btn_enter);
+
+
+        userData = businessCardDb.getUserData();
+
+
+        if (userData!=null){
+            edtName.setText(userData.getName());
+            edtDesignation.setText(userData.getDesignation());
+            edtDivision.setText(userData.getProject());
+            edtCompanyName.setText(userData.getCompanyName());
+            edtEmail.setText(userData.getEmail());
+            edtPhone.setText(userData.getPhone());
+            edtFax.setText(userData.getFax());
+            edtMobile.setText(userData.getMobile());
+            edtWebAddress.setText(userData.getWebsite());
+            edtAddress.setText(userData.getAddress());
+            registration = true;
+        } else {
+            registration = false;
+        }
 
         btnEnter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,9 +147,11 @@ public class InformationActivity extends AppCompatActivity {
                 } else {
                     UserInfoModel model = new UserInfoModel(name, designation, project, companyName, email, phone, fax, mobile, web, address);
 
-                    businessCardDb.insertUserData(model);
-
-                    Toast.makeText(InformationActivity.this, "Data Inserted", Toast.LENGTH_SHORT).show();
+                    if (registration){
+                        businessCardDb.updateUserData(model);
+                    } else {
+                        businessCardDb.insertUserData(model);
+                    }
 
                     Intent i = new Intent(InformationActivity.this, MainActivity.class);
                     startActivity(i);
