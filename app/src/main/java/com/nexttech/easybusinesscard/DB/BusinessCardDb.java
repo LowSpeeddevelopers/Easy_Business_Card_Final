@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.nexttech.easybusinesscard.Model.CollectionCardModel;
 import com.nexttech.easybusinesscard.Model.UserInfoModel;
@@ -138,7 +139,7 @@ public class BusinessCardDb extends DbHelper {
     public CollectionCardModel getSingleCardData(String userId){
         CollectionCardModel singleCardData = null;
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "select * from " + DbHelper.MY_CARDS_TABLE_NAME+ " where "+COL_ID+"="+ userId +"";
+        String query = "select * from " + DbHelper.MY_CARDS_TABLE_NAME+ " where "+ COL_ID+"="+ userId +"";
         Cursor c = db.rawQuery(query, null);
 
         while (c.moveToNext()){
@@ -163,7 +164,23 @@ public class BusinessCardDb extends DbHelper {
         return singleCardData;
     }
 
-    public void deleteCardData(int id){
+    public boolean getCardstatus(String mobile){
+        Boolean status;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "select * from " + MY_CARDS_TABLE_NAME+ " where "+COL_MOBILE+"=\""+ mobile +"\"";
+        Cursor c = db.rawQuery(query, null);
+
+        if(c != null && c.getCount()>0)
+            status = true;
+        else
+            status = false;
+
+        c.close();
+        db.close();
+        return status;
+    }
+
+    public void deleteCardData(String id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(DbHelper.MY_CARDS_TABLE_NAME, DbHelper.COL_ID + "=" + id, null);
 

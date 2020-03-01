@@ -403,10 +403,14 @@ public class ViewActivity extends AppCompatActivity {
             String address = qrData.getString("address");
             String template = qrData.getString("template");
 
-            CollectionCardModel model = new CollectionCardModel(name, designation, project, companyName, email, phone, fax, mobile, website, address, template);
+            if (businessCardDb.getCardstatus(mobile)){
+                Toast.makeText(activity, "data found", Toast.LENGTH_SHORT).show();
+            } else {
+                CollectionCardModel model = new CollectionCardModel(name, designation, project, companyName, email, phone, fax, mobile, website, address, template);
 
-            businessCardDb.insertOthersCardData(model);
-
+                businessCardDb.insertOthersCardData(model);
+            }
+            
             Log.e("debugging",qrData.toString());
             switch (template) {
                 case "temp1":
