@@ -103,7 +103,7 @@ public class InformationActivity extends AppCompatActivity {
 
 
                 if(TextUtils.isEmpty(name)) {
-                    edtName.setError("Username can't be empty");
+                    edtName.setError("Name can't be empty");
                     edtName.requestFocus();
                     edtName.setCursorVisible(true);
 
@@ -128,18 +128,25 @@ public class InformationActivity extends AppCompatActivity {
                     edtEmail.setCursorVisible(true);
 
                 }
-                else if (TextUtils.isEmpty(phone)) {
+                else if (phone.equals(null))  {
                     edtPhone.setError("Please enter a valid phone number");
                     edtPhone.requestFocus();
                     edtPhone.setCursorVisible(true);
 
-                }else if (fax.equals("") || fax.equals(null)) {
+                }else if (fax.equals(null)) {
                     edtFax.setError("Please enter a fax number");
 
-                }else if (mobile.equals("") || mobile.equals(null)) {
-                    edtMobile.setError("Enter a valid mobile number");
 
-                }else if (web.equals("") || web.equals(null)) {
+                }else if (TextUtils.isEmpty(mobile) || mobile.equals(null)) {
+                    edtMobile.setError("mobile number is missing");
+
+                }else if (mobile.length() != 11){
+                    edtMobile.setError("mobile number must be 11 digit");
+
+                }else if (!(mobile.startsWith("017") || mobile.startsWith("013") || mobile.startsWith("014") || mobile.startsWith("016") || mobile.startsWith("018") || mobile.startsWith("019") || mobile.startsWith("015"))){
+                    edtMobile.setError("Please enter a valid mobile number");
+
+                }else if (web.equals(null)) {
                     edtWebAddress.setError("Please enter a Web Address");
 
                 }else if (address.equals("") || address.equals(null)) {
