@@ -14,19 +14,19 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:scrollbars="none"
 
         >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
             android:orientation="vertical"
-            android:paddingStart="32dp"
-            android:paddingBottom="8dp"
-            android:paddingEnd="32dp"
+            android:paddingStart="@dimen/_28sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:paddingEnd="@dimen/_28sdp"
             >
 
             <EditText
@@ -36,13 +36,11 @@
                 android:hint="Name"
                 android:inputType="text"
                 android:textColor="#000"
-                android:layout_marginTop="16dp"
-                android:textSize="20sp"
                 android:background="@drawable/edit_text_border"
                 android:textAlignment="center"
-                android:padding="8dp"
-                android:layout_marginBottom="16dp"
-
+                android:padding="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_14sdp"
+                style="@android:style/TextAppearance.Medium"
                 />
             <EditText
                 android:id="@+id/edt_designation"
@@ -51,25 +49,26 @@
                 android:hint="Designation"
                 android:inputType="text"
                 android:textColor="#000"
-                android:textSize="20sp"
                 android:textAlignment="center"
                 android:background="@drawable/edit_text_border"
-                android:padding="8dp"
-                android:layout_marginBottom="16dp"
+                android:padding="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_14sdp"
+                style="@android:style/TextAppearance.Medium"
                 />
 
             <EditText
                 android:id="@+id/edt_division"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:background="@drawable/edit_text_border"
                 android:hint="Division/Project"
                 android:inputType="text"
-                android:padding="8dp"
                 android:textAlignment="center"
                 android:textColor="#000"
-                android:textSize="20sp" />
+                android:padding="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_14sdp"
+                style="@android:style/TextAppearance.Medium"
+                />
 
             <EditText
                 android:id="@+id/edt_company_name"
@@ -78,29 +77,29 @@
                 android:hint="Ministry/Company Name"
                 android:inputType="text"
                 android:textColor="#000"
-                android:textSize="20sp"
                 android:textAlignment="center"
                 android:background="@drawable/edit_text_border"
-                android:padding="8dp"
-                android:layout_marginBottom="16dp"
+                android:padding="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_14sdp"
+                style="@android:style/TextAppearance.Medium"
                 />
             <EditText
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
+                android:hint="Ministry/Company Name"
+                android:inputType="text"
                 android:textColor="#000"
-                android:textSize="20sp"
                 android:textAlignment="center"
                 android:background="@drawable/edit_text_border"
-                android:padding="8dp"
-                android:layout_marginBottom="16dp"
+                android:padding="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_14sdp"
+                style="@android:style/TextAppearance.Medium"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:orientation="horizontal"
                 >
 
@@ -111,12 +110,11 @@
                     android:layout_weight="2"
                     android:background="@drawable/edit_text_border"
                     android:gravity="center"
-                    android:padding="8dp"
+                    android:padding="@dimen/_6sdp"
                     android:hint="+88"
-                    android:editable="false"
                     android:enabled="false"
                     android:textColor="#000"
-                    android:textSize="20sp" />
+                    style="@android:style/TextAppearance.Medium" />
 
                 <View
                     android:layout_width="0dp"
@@ -129,13 +127,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
-                    android:padding="8dp"
                     android:gravity="center"
                     android:inputType="number"
                     android:digits="0123456789"
                     android:hint="Phone"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    style="@android:style/TextAppearance.Medium"
+                    android:padding="@dimen/_6sdp"
                     android:background="@drawable/edit_text_border"/>
 
             </LinearLayout>
@@ -154,12 +152,12 @@
                     android:layout_weight="2"
                     android:background="@drawable/edit_text_border"
                     android:gravity="center"
-                    android:padding="8dp"
                     android:hint="+88"
                     android:editable="false"
                     android:enabled="false"
                     android:textColor="#000"
-                    android:textSize="20sp" />
+                    style="@android:style/TextAppearance.Medium"
+                    android:padding="@dimen/_6sdp" />
 
                 <View
                     android:layout_width="0dp"
@@ -172,13 +170,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
-                    android:padding="8dp"
                     android:gravity="center"
                     android:inputType="number"
                     android:digits="0123456789"
                     android:hint="Fax"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    style="@android:style/TextAppearance.Medium"
+                    android:padding="@dimen/_6sdp"
                     android:background="@drawable/edit_text_border"/>
 
             </LinearLayout>
@@ -196,12 +194,12 @@
                     android:layout_weight="2"
                     android:background="@drawable/edit_text_border"
                     android:gravity="center"
-                    android:padding="8dp"
                     android:hint="+88"
                     android:editable="false"
                     android:enabled="false"
                     android:textColor="#000"
-                    android:textSize="20sp" />
+                    style="@android:style/TextAppearance.Medium"
+                    android:padding="@dimen/_6sdp" />
 
                 <View
                     android:layout_width="0dp"
@@ -214,13 +212,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
-                    android:padding="8dp"
                     android:gravity="center"
                     android:inputType="number"
                     android:digits="0123456789"
                     android:hint="Mobile Number"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    style="@android:style/TextAppearance.Medium"
+                    android:padding="@dimen/_6sdp"
                     android:background="@drawable/edit_text_border"/>
 
             </LinearLayout>
@@ -228,14 +226,14 @@
                 android:id="@+id/edt_web_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Website Address"
+                android:hint="Web Address"
+                android:inputType="text"
                 android:textColor="#000"
-                android:textSize="20sp"
-                android:layout_marginTop="16dp"
-                android:textAlignment="center"
                 android:background="@drawable/edit_text_border"
-                android:padding="8dp"
-                android:layout_marginBottom="5dp"
+                android:textAlignment="center"
+                android:padding="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_14sdp"
+                style="@android:style/TextAppearance.Medium"
                 />
             <EditText
                 android:id="@+id/edt_address"
@@ -244,12 +242,12 @@
                 android:layout_height="wrap_content"
                 android:hint="Address"
                 android:textColor="#000"
-                android:textSize="20sp"
-                android:layout_marginTop="16dp"
+                style="@android:style/TextAppearance.Medium"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:textAlignment="center"
                 android:background="@drawable/edit_text_border"
-                android:padding="10dp"
-                android:layout_marginBottom="16dp"
+                android:padding="@dimen/_6sdp"
+
                 />
 
 
@@ -260,12 +258,12 @@
                 android:layout_gravity="center"
                 android:textColor="#FFF"
                 android:layout_marginTop="30dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:paddingStart="@dimen/_16sdp"
+                android:paddingEnd="@dimen/_16sdp"
                 android:text="Enter"
-                android:textSize="28sp"
+                style="@android:style/TextAppearance.Medium"
                 android:background="@drawable/button_signup"/>
 
         </LinearLayout>

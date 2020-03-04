@@ -46,18 +46,19 @@
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="@dimen/_205sdp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:background="@color/color_actionbar">
                 <ImageView
-                    android:layout_width="75dp"
-                     android:layout_height="75dp"
-                    android:src="@drawable/c"/>
+                    android:layout_width="@dimen/_75sdp"
+                     android:layout_height="@dimen/_70sdp"
+                    android:src="@drawable/ic_launcher_background"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Lee Ji-eun"
+                    android:textSize="@dimen/_12sdp"
                     android:textColor="#fff"
                     android:gravity="center"
                     android:textStyle="bold"/>
@@ -65,6 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#fff"
+                    android:textSize="@dimen/_12sdp"
                     android:text="LeeJieun@gmail.com"
                     android:gravity="center"/>
             </LinearLayout>
@@ -76,27 +78,27 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:cardElevation="8dp"
-                    app:cardCornerRadius="5dp"
+                    android:layout_margin="@dimen/_6sdp"
+                    app:cardElevation="@dimen/_6sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
                     android:id="@+id/button_home">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="@dimen/_9sdp"
                         android:orientation="horizontal">
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
                             android:src="@drawable/group_181"
                             android:layout_gravity="center" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20sp"
                             android:textColor="#000"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:textSize="@dimen/_16sdp"
                             android:text="Home"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -104,108 +106,108 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:cardElevation="8dp"
-                    app:cardCornerRadius="5dp"
+                    android:layout_margin="@dimen/_6sdp"
+                    app:cardElevation="@dimen/_6sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
                     android:id="@+id/button_setting">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="@dimen/_9sdp"
                         android:orientation="horizontal">
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
                             android:src="@drawable/group_46"
                             android:layout_gravity="center" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20sp"
                             android:textColor="#000"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:textSize="@dimen/_16sdp"
                             android:text="Settings"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:cardElevation="8dp"
-                    app:cardCornerRadius="5dp"
+                    android:layout_margin="@dimen/_6sdp"
+                    app:cardElevation="@dimen/_6sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
                     android:id="@+id/button_privacy">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="@dimen/_9sdp"
                         android:orientation="horizontal">
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
                             android:src="@drawable/group_200"
                             android:layout_gravity="center" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20sp"
                             android:textColor="#000"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:textSize="@dimen/_16sdp"
                             android:text="Privacy Policy"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:cardElevation="8dp"
-                    app:cardCornerRadius="5dp"
+                    android:layout_margin="@dimen/_6sdp"
+                    app:cardElevation="@dimen/_6sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
                     android:id="@+id/button_help">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="@dimen/_9sdp"
                         android:orientation="horizontal">
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
                             android:src="@drawable/group_190"
                             android:layout_gravity="center" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20sp"
                             android:textColor="#000"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:textSize="@dimen/_16sdp"
                             android:text="Help and Support"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:cardElevation="8dp"
-                    app:cardCornerRadius="5dp"
+                    android:layout_margin="@dimen/_6sdp"
+                    app:cardElevation="@dimen/_6sdp"
+                    app:cardCornerRadius="@dimen/_3sdp"
                     android:id="@+id/button_about_us">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="@dimen/_9sdp"
                         android:orientation="horizontal">
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
                             android:src="@drawable/group_183"
                             android:layout_gravity="center" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="20sp"
                             android:textColor="#000"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:textSize="@dimen/_16sdp"
                             android:text="About Us"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-
+ 
     @Override
     public void onBackPressed() {
         TemplatesFragment test = (TemplatesFragment) getSupportFragmentManager().findFragmentByTag("Templates");
