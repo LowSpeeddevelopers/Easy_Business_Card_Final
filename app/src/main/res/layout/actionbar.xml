@@ -5,24 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@color/color_actionbar"
-    android:contentInsetLeft="0dp"
-    android:contentInsetStart="0dp"
     app:contentInsetLeft="0dp"
     app:contentInsetStart="0dp"
-    android:contentInsetRight="0dp"
-    android:contentInsetEnd="0dp"
     app:contentInsetRight="0dp"
     app:contentInsetEnd="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:paddingStart="@dimen/_4sdp"
+        android:paddingEnd="@dimen/_4sdp"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="32dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:src="@drawable/back"
             android:id="@+id/backbutton"/>
         <TextView
@@ -40,7 +38,7 @@
         <ImageView
             android:layout_width="32dp"
             android:layout_height="match_parent"
-            android:src="@drawable/threedot"
+            android:src="@drawable/menu"
             android:id="@+id/navbutton"/>
 
     </LinearLayout>

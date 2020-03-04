@@ -36,38 +36,19 @@ public class CollectonsFragment extends Fragment {
 
     public CollectonsFragment() {
     }
-
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-
-        if(isVisibleToUser){
-            MainActivity.backbutton.setVisibility(View.GONE);
-            MainActivity.navbutton.setVisibility(View.GONE);
-        }
-
-    }
-
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_collectons, container, false);
-
         edtSearch = view.findViewById(R.id.edt_search);
         rvCardList = view.findViewById(R.id.rv_card_list);
-
         businessCardDb = new BusinessCardDb(getContext());
-
         cardCollections = businessCardDb.getCardData();
-
         rvCardList.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCardList.setHasFixedSize(true);
-
         adapter = new CardListAdapter(getContext(), cardCollections);
-
         rvCardList.setAdapter(adapter);
-
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

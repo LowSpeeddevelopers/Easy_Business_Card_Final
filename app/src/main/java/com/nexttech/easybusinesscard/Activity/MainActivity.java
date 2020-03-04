@@ -54,7 +54,10 @@ public class MainActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                TemplatesFragment test = (TemplatesFragment) getSupportFragmentManager().findFragmentByTag("Templates");
+                if(test!=null && !test.isVisible()){
+                    openFragment(new TemplatesFragment(),"Templates");
+                }
             }
         });
         setting.setOnClickListener(new View.OnClickListener() {
