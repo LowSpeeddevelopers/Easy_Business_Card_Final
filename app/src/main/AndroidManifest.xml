@@ -12,18 +12,18 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/businesscardlogo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/businesscardlogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activity.IntroductionActivity"></activity>
+        <activity android:name=".Activity.IntroductionActivity" />
         <activity android:name=".Activity.ViewActivity" />
         <activity android:name=".Activity.InformationActivity" />
         <activity
             android:name=".Activity.MainActivity"
-            android:theme="@style/NoActionBar"></activity>
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".Activity.SplashActivity"
             android:theme="@style/NoActionBar">
