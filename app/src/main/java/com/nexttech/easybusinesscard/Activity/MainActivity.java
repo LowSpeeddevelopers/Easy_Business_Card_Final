@@ -1,5 +1,6 @@
 package com.nexttech.easybusinesscard.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -58,9 +59,9 @@ public class MainActivity extends AppCompatActivity {
         update = findViewById(R.id.button_updateinfo);
 
 
-        if(!checkDataBase()){
-            startActivity(new Intent(this,IntroductionActivity.class));
-        }
+//        if(!checkDataBase()){
+//            startActivity(new Intent(this,IntroductionActivity.class));
+//        }
 
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -186,6 +187,10 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return isexists;
+    }
+
+    public static Context getContext(){
+        return getContext();
     }
 
 }

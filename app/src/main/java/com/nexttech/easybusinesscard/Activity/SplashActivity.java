@@ -1,6 +1,9 @@
 package com.nexttech.easybusinesscard.Activity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -41,15 +44,30 @@ public class SplashActivity extends AppCompatActivity {
 
                 userData = businessCardDb.getUserData();
 
-                Intent i;
+                Activity context;
+                Intent intent;
 
                 if (userData!=null){
-                    i = new Intent(SplashActivity.this,MainActivity.class);
+                    context = new MainActivity();
                 } else {
-                    i = new Intent(SplashActivity.this,IntroductionActivity.class);
+                    context = new InformationActivity();
                 }
 
-                startActivity(i);
+                //startActivity(intentNext);
+
+                SharedPreferences pref = getSharedPreferences("ActivityPREF", Context.MODE_PRIVATE);
+                if (pref.getBoolean("activity_executed", false)){
+                    intent = new Intent(SplashActivity.this,context.getClass());
+                } else {
+                    intent = new Intent(SplashActivity.this,AppIntroActivity.class);
+
+                    SharedPreferences.Editor ed = pref.edit();
+                    ed.putBoolean("activity_executed", false);
+                    ed.commit();
+
+                }
+
+                startActivity(intent);
                 finish();
             }
         },5000);

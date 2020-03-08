@@ -18,6 +18,9 @@ android {
         }
     }
 }
+repositories {
+    maven { url 'https://jitpack.io' }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -33,4 +36,5 @@ dependencies {
     implementation 'com.budiyev.android:code-scanner:2.1.0' //qr code scan
     implementation 'com.karumi:dexter:6.0.0' //runtime permission
     implementation 'com.intuit.sdp:sdp-android:1.0.6' // scalable size unit
+    implementation 'com.github.apl-devs:appintro:v4.2.3' // app introduction
 }
