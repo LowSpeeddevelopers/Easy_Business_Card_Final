@@ -87,8 +87,8 @@
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ministry/Company Name"
-                android:inputType="text"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
                 android:textColor="#000"
                 android:textAlignment="center"
                 android:background="@drawable/edit_text_border"
@@ -102,8 +102,6 @@
                 android:layout_marginTop="@dimen/_8sdp"
                 android:orientation="horizontal"
                 >
-
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -115,7 +113,6 @@
                     android:enabled="false"
                     android:textColor="#000"
                     style="@android:style/TextAppearance.Medium" />
-
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -128,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:gravity="center"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:digits="0123456789"
                     android:hint="Phone"
                     android:textColor="#000"
@@ -141,11 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                >
-
-
+                android:layout_marginTop="@dimen/_4sdp">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -158,13 +151,10 @@
                     android:textColor="#000"
                     style="@android:style/TextAppearance.Medium"
                     android:padding="@dimen/_6sdp" />
-
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_weight=".5"/>
-
-
                 <EditText
                     android:id="@+id/edt_fax"
                     android:layout_width="0dp"
@@ -183,7 +173,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/_4sdp"
                 android:orientation="horizontal"
                 >
 
@@ -213,13 +203,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:gravity="center"
-                    android:inputType="number"
-                    android:digits="0123456789"
+                    android:inputType="phone"
                     android:hint="Mobile Number"
                     android:textColor="#000"
                     style="@android:style/TextAppearance.Medium"
                     android:padding="@dimen/_6sdp"
-                    android:background="@drawable/edit_text_border"/>
+                    android:background="@drawable/edit_text_border"
+                    android:importantForAutofill="no" />
 
             </LinearLayout>
             <EditText
@@ -232,7 +222,7 @@
                 android:background="@drawable/edit_text_border"
                 android:textAlignment="center"
                 android:padding="@dimen/_6sdp"
-                android:layout_marginTop="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 style="@android:style/TextAppearance.Medium"
                 />
             <EditText

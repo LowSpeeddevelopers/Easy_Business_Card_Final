@@ -2,11 +2,6 @@ package com.nexttech.easybusinesscard.Fragments;
 
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -14,15 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.nexttech.easybusinesscard.Activity.MainActivity;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.nexttech.easybusinesscard.Adapter.CardListAdapter;
 import com.nexttech.easybusinesscard.DB.BusinessCardDb;
 import com.nexttech.easybusinesscard.Model.CollectionCardModel;
-import com.nexttech.easybusinesscard.Model.UserInfoModel;
 import com.nexttech.easybusinesscard.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CollectonsFragment extends Fragment {
 
@@ -36,7 +32,7 @@ public class CollectonsFragment extends Fragment {
 
     public CollectonsFragment() {
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

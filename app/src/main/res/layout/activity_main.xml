@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/drawerlayout"
     tools:openDrawer="end"
     tools:context=".Activity.MainActivity">
 
@@ -29,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/color_actionbar"
+            android:background="@color/buttonColor"
             app:itemIconTint="@android:color/white"
             app:itemTextColor="@android:color/white"
             app:menu="@menu/bottom_nav_menu" />
@@ -53,7 +54,8 @@
                 <ImageView
                     android:layout_width="@dimen/_75sdp"
                      android:layout_height="@dimen/_70sdp"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/ic_launcher_background"
+                    android:contentDescription="TODO" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -97,7 +99,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="#000"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
                             android:textSize="@dimen/_16sdp"
                             android:text="Home"/>
                     </LinearLayout>
@@ -109,7 +111,7 @@
                     android:layout_margin="@dimen/_6sdp"
                     app:cardElevation="@dimen/_6sdp"
                     app:cardCornerRadius="@dimen/_3sdp"
-                    android:id="@+id/button_setting">
+                    android:id="@+id/button_updateinfo">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -118,16 +120,16 @@
                         <ImageView
                             android:layout_width="@dimen/_17sdp"
                             android:layout_height="@dimen/_17sdp"
-                            android:src="@drawable/group_46"
+                            android:src="@drawable/edit"
                             android:layout_gravity="center" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#000"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
                             android:textSize="@dimen/_16sdp"
-                            android:text="Settings"/>
+                            android:text="Update Information"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
@@ -154,6 +156,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="@dimen/_8sdp"
                             android:textSize="@dimen/_16sdp"
+                            android:layout_marginStart="10dp"
                             android:text="Privacy Policy"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -181,6 +184,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="@dimen/_8sdp"
                             android:textSize="@dimen/_16sdp"
+                            android:layout_marginStart="10dp"
                             android:text="Help and Support"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -208,6 +212,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="@dimen/_8sdp"
                             android:textSize="@dimen/_16sdp"
+                            android:layout_marginStart="10dp"
                             android:text="About Us"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

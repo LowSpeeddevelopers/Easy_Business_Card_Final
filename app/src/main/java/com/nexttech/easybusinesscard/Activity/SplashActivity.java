@@ -46,7 +46,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (userData!=null){
                     i = new Intent(SplashActivity.this,MainActivity.class);
                 } else {
-                    i = new Intent(SplashActivity.this,InformationActivity.class);
+                    i = new Intent(SplashActivity.this,IntroductionActivity.class);
                 }
 
                 startActivity(i);
