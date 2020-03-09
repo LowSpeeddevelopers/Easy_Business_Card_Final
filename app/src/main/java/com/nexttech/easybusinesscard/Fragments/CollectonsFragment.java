@@ -54,19 +54,19 @@ public class CollectonsFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                String search = edtSearch.getText().toString();
+                String search = edtSearch.getText().toString().toLowerCase();
 
                 ArrayList<CollectionCardModel> cardSearchCollections = new ArrayList<>();
                 for (CollectionCardModel model : cardCollections) {
-                    if (model.getName().contains(search)){
+                    if (model.getName().toLowerCase().contains(search)){
                         cardSearchCollections.add(model);
-                    } else if (model.getDesignation().contains(search)){
+                    } else if (model.getDesignation().toLowerCase().contains(search)){
                         cardSearchCollections.add(model);
-                    } else if (model.getMobile().contains(search)){
+                    } else if (model.getMobile().toLowerCase().contains(search)){
                         cardSearchCollections.add(model);
-                    } else if (model.getCompanyName().contains(search)){
+                    } else if (model.getCompanyName().toLowerCase().contains(search)){
                         cardSearchCollections.add(model);
-                    } else if (model.getEmail().contains(search)){
+                    } else if (model.getEmail().toLowerCase().contains(search)){
                         cardSearchCollections.add(model);
                     }
                 }

@@ -215,6 +215,10 @@ public class ViewActivity extends AppCompatActivity {
                             qrData.has("address")&&
                             qrData.has("template")) {
                         setUpAsOtherUser();
+
+                        qrCodeValue = qrData.toString();
+
+                        generateQrCode();
                     }else {
                         Toast.makeText(activity, "This is not a valid Data!", Toast.LENGTH_SHORT).show();
                     }
@@ -223,6 +227,8 @@ public class ViewActivity extends AppCompatActivity {
                 }catch (JSONException e){
                     Toast.makeText(activity, "Unknown Data Type!", Toast.LENGTH_SHORT).show();
                 }
+
+
             }
 
         }else if(getIntent().hasExtra("template")) {

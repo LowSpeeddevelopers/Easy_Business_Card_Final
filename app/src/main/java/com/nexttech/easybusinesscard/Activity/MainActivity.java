@@ -1,17 +1,21 @@
 package com.nexttech.easybusinesscard.Activity;
 
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -24,9 +28,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.nexttech.easybusinesscard.Fragments.CollectonsFragment;
 import com.nexttech.easybusinesscard.Fragments.ScanFragment;
 import com.nexttech.easybusinesscard.Fragments.TemplatesFragment;
+import com.nexttech.easybusinesscard.Model.ContactModel;
 import com.nexttech.easybusinesscard.R;
 
-import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
     CardView home, privacy_policy,help,about,update;
     DrawerLayout mlayout;
 
-
+    ScrollView scrollView;
+    LinearLayout mainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +101,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mlayout.closeDrawer(GravityCompat.END);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setView(createContactUs());
+                builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
         update.setOnClickListener(new View.OnClickListener() {
@@ -144,13 +161,11 @@ public class MainActivity extends AppCompatActivity {
                             navbutton.setVisibility(View.VISIBLE);
                             backbutton.setVisibility(View.VISIBLE);
                             openFragment(new TemplatesFragment(),"Templates");
-
                             return true;
                         case R.id.navigation_scan:
                             navbutton.setVisibility(View.GONE);
                             backbutton.setVisibility(View.GONE);
                             openFragment(new ScanFragment(MainActivity.this),"Scan");
-
                             return true;
                         case R.id.navigation_collections:
                             navbutton.setVisibility(View.VISIBLE);
@@ -189,8 +204,100 @@ public class MainActivity extends AppCompatActivity {
         return isexists;
     }
 
-    public static Context getContext(){
-        return getContext();
+    private View createContactUs(){
+        ArrayList<ContactModel> seniorDeveloper = new ArrayList<>();
+        ArrayList<ContactModel> juniorDeveloper = new ArrayList<>();
+        ArrayList<ContactModel> seniorDesign = new ArrayList<>();
+        ArrayList<ContactModel> juniorDesign = new ArrayList<>();
+
+        seniorDeveloper.add(new ContactModel("RmFoaW0gRmFoYWQgTGVvbg==", "ZmFoaW1mYWhhZGxlb0BnbWFpbC5jb20=", "MDE5MTQ2MTY0NTM=", "aHR0cHM6Ly9naXRodWIuY29tL2ZhaGltZmFoYWRsZW8="));
+        juniorDeveloper.add(new ContactModel("QWZyb3ogSG9zc2Fpbg==", "YWZyb3oubmVyb0BnbWFpbC5jb20=", "MDE3NjYyMjYyNjI=", "aHR0cHM6Ly9naXRodWIuY29tL2Fmcm96LW5lcm8="));
+        juniorDeveloper.add(new ContactModel("TmF5YW4gQ2hha3JhYmFydHk=", "bmF5YW5kY2M1QGdtYWlsLmNvbQ==", "MDE1MjEzODA5NzQ=", "aHR0cHM6Ly9naXRodWIuY29tL25heWFuY2hha3JhYmFydHk="));
+        juniorDeveloper.add(new ContactModel("UXVhemkgTWFoYWJ1YnVsIEhhc2Fu", "aHJpZG95aGFzYW4xNEBnbWFpbC5jb20=", "MDE5MTM2Mjg0MTA=", "aHR0cHM6Ly9naXRodWIuY29tL0hyaWRveUhhc2Fu"));
+        juniorDeveloper.add(new ContactModel("U2hhaGFyaWFyIE5ld2F6IFRha2k=", "c2hhaGFyaWFybmF3c2hpbnRha2lAZ21haWwuY29t", "MDE2NzkxMzE0MTM=", "aHR0cHM6Ly9naXRodWIuY29tL3NoYWhhcmlhcnRha2k="));
+        juniorDeveloper.add(new ContactModel("Ry5LLlNuaWdkaGE=", "Z2tzbmlnZGhhY3NlNDFAZ21haWwuY29t", "MDE3ODMwMzkyMzk=", "aHR0cHM6Ly9naXRodWIuY29tL0dLU25pZ2RoYQ=="));
+
+
+        scrollView = new ScrollView(this);
+        LinearLayout.LayoutParams scrollParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        scrollView.setPadding(10,10,10,10);
+        scrollView.setLayoutParams(scrollParam);
+
+        mainLayout = new LinearLayout(this);
+        mainLayout.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams mainParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        mainLayout.setLayoutParams(mainParam);
+
+
+        mainLayout.addView(singleText("Contact Us", View.TEXT_ALIGNMENT_CENTER, 24));
+        mainLayout.addView(addContact("Senior Developer", seniorDeveloper));
+        mainLayout.addView(addContact("Junior Developer", juniorDeveloper));
+        mainLayout.addView(addContact("Senior UI Design", seniorDesign));
+        mainLayout.addView(addContact("Junior UI Design", juniorDesign));
+
+        scrollView.addView(mainLayout);
+
+        return scrollView;
+    }
+
+    private TextView singleText(String text, int alignment, float size){
+        TextView tv = new TextView(this);
+        tv.setText(text);
+        LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        tv.setLayoutParams(tvParams);
+        tv.setTextAlignment(alignment);
+        tv.setTextColor(Color.BLACK);
+        tv.setTextSize(size);
+
+        return tv;
+    }
+
+    private CardView addContact(String title, ArrayList<ContactModel> information){
+        CardView cardView = new CardView(this);
+
+        LinearLayout.LayoutParams cardViewParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        cardViewParam.setMargins(20,20,20,20);
+
+        cardView.setLayoutParams(cardViewParam);
+        cardView.setPadding(20, 20, 20, 20);
+        cardView.setRadius(20);
+        cardView.setCardBackgroundColor(Color.WHITE);
+
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setPadding(20, 20, 20, 20);
+        LinearLayout.LayoutParams linearParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        linearLayout.setLayoutParams(linearParam);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+        linearLayout.addView(singleText(title, View.TEXT_ALIGNMENT_TEXT_START, 20));
+
+        for (int i = 0; i<information.size(); i++){
+            ContactModel contactModel = information.get(i);
+
+            View view = new View(this);
+            LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 2);
+            viewParams.setMargins(0,10,0,10);
+            view.setLayoutParams(viewParams);
+            view.setBackgroundColor(Color.GRAY);
+
+            LinearLayout linearLayout1 = new LinearLayout(this);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            linearLayout1.setLayoutParams(layoutParams);
+            linearLayout1.setPadding(0,10,0,0);
+            linearLayout1.setOrientation(LinearLayout.VERTICAL);
+
+            linearLayout1.addView(singleText(contactModel.getName(), View.TEXT_ALIGNMENT_TEXT_START, 18));
+            linearLayout1.addView(singleText(contactModel.getContact(), View.TEXT_ALIGNMENT_TEXT_START, 16));
+            linearLayout1.addView(singleText(contactModel.getEmail(), View.TEXT_ALIGNMENT_TEXT_START, 16));
+            linearLayout1.addView(singleText(contactModel.getGithub(), View.TEXT_ALIGNMENT_TEXT_START, 16));
+
+            linearLayout.addView(view);
+            linearLayout.addView(linearLayout1);
+        }
+
+        cardView.addView(linearLayout);
+
+        return cardView;
     }
 
 }
