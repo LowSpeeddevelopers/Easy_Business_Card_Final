@@ -27,12 +27,22 @@ public class AppIntroActivity extends AppIntro {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_app_intro);
 
-        addSlide(AppIntroFragment.newInstance("First App Intro","Fist App Intro Details",
-                R.drawable.ic_card, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
-        addSlide(AppIntroFragment.newInstance("First App Intro","Fist App Intro Details",
-                R.drawable.ic_card, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
-        addSlide(AppIntroFragment.newInstance("First App Intro","Fist App Intro Details",
-                R.drawable.ic_card, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance(getResources().getString(R.string.intro_page1_title),
+                getResources().getString(R.string.intro_page1_details),
+                R.drawable.businesscardlarge, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance(getResources().getString(R.string.intro_page2_title),
+                getResources().getString(R.string.intro_page2_details),
+                R.drawable.businesscardlarge, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance(getResources().getString(R.string.intro_page3_title),
+                getResources().getString(R.string.intro_page3_details),
+                R.drawable.businesscardlarge, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance(getResources().getString(R.string.intro_page4_title),
+                getResources().getString(R.string.intro_page4_details),
+                R.drawable.businesscardlarge, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance(getResources().getString(R.string.intro_page5_title),
+                getResources().getString(R.string.intro_page5_details),
+                R.drawable.businesscardlarge, ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
+
     }
 
     @Override

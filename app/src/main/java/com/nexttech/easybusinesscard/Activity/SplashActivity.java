@@ -62,7 +62,7 @@ public class SplashActivity extends AppCompatActivity {
                     intent = new Intent(SplashActivity.this,AppIntroActivity.class);
 
                     SharedPreferences.Editor ed = pref.edit();
-                    ed.putBoolean("activity_executed", false);
+                    ed.putBoolean("activity_executed", true);
                     ed.commit();
 
                 }

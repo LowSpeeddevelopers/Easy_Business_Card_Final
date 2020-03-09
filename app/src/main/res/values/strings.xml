@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Easy Business Card</string>
     <string name="privacy_policy">Welcome to Easy Business Card, a personalized digital business card that brings together everyone you know across multiple profession profiles or just display your Easy Business Card profile to other Easy Business Card profiled users. You create your professional profile. </string>
+    <string name="intro_page1_title">Enjoy unlimited card designs!</string>
+    <string name="intro_page1_details">Don’t pay anymore to design your favorite business card!</string>
+    <string name="intro_page2_title">Create a card with one click!</string>
+    <string name="intro_page2_details">Give information and choose a theme, bingo!</string>
+    <string name="intro_page3_title">Save and Share your card!</string>
+    <string name="intro_page3_details">Save your card as jpg and share with others.</string>
+    <string name="intro_page4_title">Scan card and save it!</string>
+    <string name="intro_page4_details">By scanning, now you can save cards in your collection.</string>
+    <string name="intro_page5_title">Never lose a business card again!</string>
+    <string name="intro_page5_details">With this app never lose a business card again!</string>
 </resources>
