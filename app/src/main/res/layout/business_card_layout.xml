@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="#FFF"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/card_front_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/temp1_front"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/card_back_background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/temp1_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_front_background" />
+
+        <LinearLayout
+            android:id="@+id/layout_name_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:gravity="right"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <TextView
+                android:id="@+id/card_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Afroz Hossain"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:textSize="@dimen/_18sdp" />
+
+            <TextView
+                android:id="@+id/card_designation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Android Developer"
+                android:textColor="#000"
+                android:textSize="@dimen/_13sdp" />
+
+            <TextView
+                android:id="@+id/card_project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Game and App Development"
+                android:textColor="#000"
+                android:textSize="@dimen/_13sdp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_company_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_33sdp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/card_front_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/card_company_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NextTech Ltd"
+                android:textColor="#000"
+                android:textSize="@dimen/_22sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/card_company_web_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="www.google.com"
+                android:textColor="#000"
+                android:textSize="@dimen/_14sdp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_contact_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:gravity="left"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/card_back_background">
+
+            <TextView
+                android:id="@+id/card_cell_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01766226262"
+                android:textColor="#000"
+                android:textSize="@dimen/_14sdp" />
+
+            <TextView
+                android:id="@+id/card_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01766226262"
+                android:textColor="#000"
+                android:textSize="@dimen/_14sdp" />
+
+            <TextView
+                android:id="@+id/card_fax_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01766226262"
+                android:textColor="#000"
+                android:textSize="@dimen/_14sdp" />
+
+            <TextView
+                android:id="@+id/card_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="afroz.nero@gmail.com"
+                android:textColor="#000"
+                android:textSize="@dimen/_14sdp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_company_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/card_company_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dhaka"
+                android:textColor="#FFF"
+                android:textSize="@dimen/_15sdp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</LinearLayout>

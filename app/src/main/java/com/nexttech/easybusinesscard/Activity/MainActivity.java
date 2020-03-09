@@ -1,5 +1,6 @@
 package com.nexttech.easybusinesscard.Activity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,10 +26,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.nexttech.easybusinesscard.DB.BusinessCardDb;
 import com.nexttech.easybusinesscard.Fragments.CollectonsFragment;
 import com.nexttech.easybusinesscard.Fragments.ScanFragment;
 import com.nexttech.easybusinesscard.Fragments.TemplatesFragment;
 import com.nexttech.easybusinesscard.Model.ContactModel;
+import com.nexttech.easybusinesscard.Model.UserInfoModel;
 import com.nexttech.easybusinesscard.R;
 
 import java.util.ArrayList;
@@ -36,7 +39,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigation;
-    TextView titleview;
+    TextView titleview, tvUserName, tvUserDesignation, tvUserCompanyName;
     public static ImageView backbutton;
     public static ImageView navbutton;
     CardView home, privacy_policy,help,about,update;
@@ -44,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
     ScrollView scrollView;
     LinearLayout mainLayout;
+
+    BusinessCardDb businessCardDb;
+    UserInfoModel userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +70,11 @@ public class MainActivity extends AppCompatActivity {
         navbutton = toolbar.findViewById(R.id.navbutton);
         update = findViewById(R.id.button_updateinfo);
 
+        tvUserName = findViewById(R.id.tv_user_name);
+        tvUserDesignation = findViewById(R.id.tv_user_designation);
+        tvUserCompanyName = findViewById(R.id.tv_user_company_name);
 
-//        if(!checkDataBase()){
-//            startActivity(new Intent(this,IntroductionActivity.class));
-//        }
+        fetchUserData();
 
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +148,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void fetchUserData() {
+        businessCardDb = new BusinessCardDb(this);
+
+        userData = businessCardDb.getUserData();
+
+        if (userData!=null){
+            tvUserName.setText(userData.getName());
+            tvUserDesignation.setText(userData.getDesignation());
+            tvUserCompanyName.setText(userData.getCompanyName());
+        }
+    }
+
     public void openFragment(Fragment fragment,String tag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment,tag);
@@ -186,22 +205,6 @@ public class MainActivity extends AppCompatActivity {
         }else {
             openFragment(new TemplatesFragment(),"Templates");
         }
-    }
-
-
-    private boolean checkDataBase() {
-
-        boolean isexists = false;
-        try {
-            SQLiteDatabase checkDB = SQLiteDatabase.openDatabase(this.getDatabasePath("business_card_db").getPath(), null,
-                    SQLiteDatabase.OPEN_READONLY);
-            checkDB.close();
-            isexists = true;
-        } catch (SQLiteException e) {
-            // database doesn't exist yet.
-
-        }
-        return isexists;
     }
 
     private View createContactUs(){

@@ -42,7 +42,6 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.util.EnumMap;
 import java.util.List;
 
 import androidmads.library.qrgenearator.QRGContents;
@@ -58,10 +57,9 @@ public class ViewActivity extends AppCompatActivity {
     Drawable imageResourceFront, imageResourceBack;
 
     ImageView cardFrontBackground, cardBackBackground;
-    TextView cardName, cardDesignation, cardMobile, cardAddress;
+    TextView cardName, cardDesignation, cardProject, cardCompanyName, cardCompanyWebAddress, cardCell, cardPhone, cardFax, cardEmail, cardCompanyAddress;
 
     BusinessCardDb businessCardDb;
-    UserInfoModel userData;
     CollectionCardModel cardData;
 
     private String qrCodeValue;
@@ -75,8 +73,6 @@ public class ViewActivity extends AppCompatActivity {
     AlertDialog alertDialog;
 
     LinearLayout linearLayout;
-
-    String temp;
 
     TextView tvDialogTitle, tvCard, tvQrCode, tvCancel;
     JSONObject qrData;
@@ -94,14 +90,20 @@ public class ViewActivity extends AppCompatActivity {
 
         activity = this;
 
-        View vi = LayoutInflater.from(this).inflate(R.layout.business_card_front,null);
+        View vi = LayoutInflater.from(this).inflate(R.layout.business_card_layout,null);
 
         cardFrontBackground = vi.findViewById(R.id.card_front_background);
         cardBackBackground = vi.findViewById(R.id.card_back_background);
         cardName = vi.findViewById(R.id.card_name);
         cardDesignation = vi.findViewById(R.id.card_designation);
-        cardMobile = vi.findViewById(R.id.card_mobile);
-        cardAddress = vi.findViewById(R.id.card_address);
+        cardProject = vi.findViewById(R.id.card_project);
+        cardCompanyName = vi.findViewById(R.id.card_company_name);
+        cardCompanyWebAddress = vi.findViewById(R.id.card_company_web_address);
+        cardCell = vi.findViewById(R.id.card_cell_number);
+        cardPhone = vi.findViewById(R.id.card_phone_number);
+        cardFax = vi.findViewById(R.id.card_fax_number);
+        cardEmail = vi.findViewById(R.id.card_email);
+        cardCompanyAddress = vi.findViewById(R.id.card_company_address);
 
         dialogueView = getLayoutInflater().inflate(R.layout.share_dialoguebox, null);
 
@@ -233,39 +235,16 @@ public class ViewActivity extends AppCompatActivity {
 
         }else if(getIntent().hasExtra("template")) {
 
-            temp=getIntent().getStringExtra("template");
+            String temp=getIntent().getStringExtra("template");
 
-            userData = businessCardDb.getUserData();
+            UserInfoModel userData = businessCardDb.getUserData();
 
-            assert temp != null;
-            switch (temp) {
-                case "temp1":
-                    imageResourceFront = getResources().getDrawable(R.drawable.temp1_front);
-                    imageResourceBack = getResources().getDrawable(R.drawable.temp1_back);
-                    break;
-                case "temp2":
-                    imageResourceFront = getResources().getDrawable(R.drawable.temp2_front);
-                    imageResourceBack = getResources().getDrawable(R.drawable.temp2_back);
-                    break;
-                case "temp3":
-                    imageResourceFront = getResources().getDrawable(R.drawable.temp3_front);
-                    imageResourceBack = getResources().getDrawable(R.drawable.temp3_back);
-                    break;
-            }
+            setTemplate(temp);
 
-
-            cardFrontBackground.setImageDrawable(imageResourceFront);
-            cardBackBackground.setImageDrawable(imageResourceBack);
-
-            cardName.setText(userData.getName());
-            cardDesignation.setText(userData.getDesignation());
-            cardMobile.setText(userData.getMobile());
-            cardAddress.setText(userData.getAddress());
+            setCardData(userData);
 
             JSONObject myData = new JSONObject();
             try {
-
-
                 String name = userData.getName();
                 String designation = userData.getDesignation();
                 String project = userData.getProject();
@@ -276,8 +255,6 @@ public class ViewActivity extends AppCompatActivity {
                 String mobile = userData.getMobile();
                 String website = userData.getWebsite();
                 String address = userData.getAddress();
-
-
 
                 myData.put("name",name);
                 myData.put("designation",designation);
@@ -315,34 +292,14 @@ public class ViewActivity extends AppCompatActivity {
 
             Log.e("card",cardData.getCardTemplate());
 
-            switch (cardData.getCardTemplate()) {
-                case "temp1":
-                    imageResourceFront = getResources().getDrawable(R.drawable.temp1_front);
-                    imageResourceBack = getResources().getDrawable(R.drawable.temp1_back);
-                    break;
-                case "temp2":
-                    imageResourceFront = getResources().getDrawable(R.drawable.temp2_front);
-                    imageResourceBack = getResources().getDrawable(R.drawable.temp2_back);
-                    break;
-                case "temp3":
-                    imageResourceFront = getResources().getDrawable(R.drawable.temp3_front);
-                    imageResourceBack = getResources().getDrawable(R.drawable.temp3_back);
-                    break;
-            }
+            setTemplate(cardData.getCardTemplate());
 
+            UserInfoModel userData = new UserInfoModel(cardData.getName(), cardData.getDesignation(), cardData.getProject(), cardData.getCompanyName(), cardData.getEmail(), cardData.getPhone(), cardData.getFax(), cardData.getMobile(), cardData.getWebsite(), cardData.getAddress());
 
-            cardFrontBackground.setImageDrawable(imageResourceFront);
-            cardBackBackground.setImageDrawable(imageResourceBack);
-
-            cardName.setText(cardData.getName());
-            cardDesignation.setText(cardData.getDesignation());
-            cardMobile.setText(cardData.getMobile());
-            cardAddress.setText(cardData.getAddress());
+            setCardData(userData);
 
             JSONObject myData = new JSONObject();
             try {
-
-
                 String name = cardData.getName();
                 String designation = cardData.getDesignation();
                 String project = cardData.getProject();
@@ -353,8 +310,7 @@ public class ViewActivity extends AppCompatActivity {
                 String mobile = cardData.getMobile();
                 String website = cardData.getWebsite();
                 String address = cardData.getAddress();
-
-
+                String temp = cardData.getCardTemplate();
 
                 myData.put("name",name);
                 myData.put("designation",designation);
@@ -390,9 +346,7 @@ public class ViewActivity extends AppCompatActivity {
 
     }
 
-    void setUpAsOtherUser(){
-
-
+    private void setUpAsOtherUser(){
         Log.e("debugging","here");
 
         try {
@@ -409,60 +363,89 @@ public class ViewActivity extends AppCompatActivity {
             String address = qrData.getString("address");
             String template = qrData.getString("template");
 
+            CollectionCardModel cardModel;
+
             if (businessCardDb.getCardstatus(mobile)){
                 Toast.makeText(activity, "data found", Toast.LENGTH_SHORT).show();
             } else {
-                CollectionCardModel model = new CollectionCardModel(name, designation, project, companyName, email, phone, fax, mobile, website, address, template);
+                cardModel = new CollectionCardModel(name, designation, project, companyName, email, phone, fax, mobile, website, address, template);
 
-                businessCardDb.insertOthersCardData(model);
-            }
-            
-            Log.e("debugging",qrData.toString());
-            switch (template) {
-                case "temp1":
-                    imageResourceFront = getResources().getDrawable(R.drawable.temp1_front);
-                    imageResourceBack = getResources().getDrawable(R.drawable.temp1_back);
-                    break;
-                case "temp2":
-                    imageResourceFront = getResources().getDrawable(R.drawable.temp2_front);
-                    imageResourceBack = getResources().getDrawable(R.drawable.temp2_back);
-                    break;
-                case "temp3":
-                    imageResourceFront = getResources().getDrawable(R.drawable.temp3_front);
-                    imageResourceBack = getResources().getDrawable(R.drawable.temp3_back);
-                    break;
+                businessCardDb.insertOthersCardData(cardModel);
             }
 
+            setTemplate(template);
 
+            UserInfoModel userData = new UserInfoModel(cardData.getName(), cardData.getDesignation(), cardData.getProject(), cardData.getCompanyName(), cardData.getEmail(), cardData.getPhone(), cardData.getFax(), cardData.getMobile(), cardData.getWebsite(), cardData.getAddress());
 
-            View vi = LayoutInflater.from(this).inflate(R.layout.business_card_front,null);
-
-            cardFrontBackground = vi.findViewById(R.id.card_front_background);
-            cardBackBackground = vi.findViewById(R.id.card_back_background);
-            cardName = vi.findViewById(R.id.card_name);
-            cardDesignation = vi.findViewById(R.id.card_designation);
-            cardMobile = vi.findViewById(R.id.card_mobile);
-            cardAddress = vi.findViewById(R.id.card_address);
-
-            cardFrontBackground.setImageDrawable(imageResourceFront);
-            cardBackBackground.setImageDrawable(imageResourceBack);
-
-
-            cardName.setText(name);
-            cardDesignation.setText(designation);
-            cardMobile.setText(mobile);
-            cardAddress.setText(address);
-
-
-            if(vi.getParent() != null) {
-                ((ViewGroup)vi.getParent()).removeView(vi); // <- fix
-            }
-            linearLayout.addView(vi);
+            setCardData(userData);
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setCardData(UserInfoModel userData) {
+        cardName.setText(userData.getName());
+        cardDesignation.setText(userData.getDesignation());
+        cardProject.setText(userData.getProject());
+        cardCompanyName.setText(userData.getCompanyName());
+        cardCompanyWebAddress.setText(userData.getWebsite());
+        cardCell.setText(userData.getMobile());
+        cardPhone.setText(userData.getPhone());
+        cardFax.setText(userData.getFax());
+        cardEmail.setText(userData.getEmail());
+        cardCompanyAddress.setText(userData.getAddress());
+
+        if (userData.getPhone().isEmpty()){
+            cardPhone.setVisibility(View.GONE);
+        } else {
+            cardPhone.setVisibility(View.VISIBLE);
+        }
+
+        if (userData.getFax().isEmpty()){
+            cardFax.setVisibility(View.GONE);
+        } else {
+            cardFax.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setTemplate(String temp) {
+
+        switch (temp) {
+            case "temp1":
+                imageResourceFront = getResources().getDrawable(R.drawable.temp1_front);
+                imageResourceBack = getResources().getDrawable(R.drawable.temp1_back);
+                break;
+            case "temp2":
+                imageResourceFront = getResources().getDrawable(R.drawable.temp2_front);
+                imageResourceBack = getResources().getDrawable(R.drawable.temp2_back);
+                break;
+            case "temp3":
+                imageResourceFront = getResources().getDrawable(R.drawable.temp3_front);
+                imageResourceBack = getResources().getDrawable(R.drawable.temp3_back);
+                break;
+            case "temp4":
+                imageResourceFront = getResources().getDrawable(R.drawable.temp4_front);
+                imageResourceBack = getResources().getDrawable(R.drawable.temp4_back);
+                break;
+            case "temp5":
+                imageResourceFront = getResources().getDrawable(R.drawable.temp5_front);
+                imageResourceBack = getResources().getDrawable(R.drawable.temp5_back);
+                break;
+            case "temp6":
+                imageResourceFront = getResources().getDrawable(R.drawable.temp6_front);
+                imageResourceBack = getResources().getDrawable(R.drawable.temp6_back);
+                break;
+            case "temp7":
+                imageResourceFront = getResources().getDrawable(R.drawable.temp7_front);
+                imageResourceBack = getResources().getDrawable(R.drawable.temp7_back);
+                break;
+        }
+
+        cardFrontBackground.setImageDrawable(imageResourceFront);
+        cardBackBackground.setImageDrawable(imageResourceBack);
+
     }
 
 

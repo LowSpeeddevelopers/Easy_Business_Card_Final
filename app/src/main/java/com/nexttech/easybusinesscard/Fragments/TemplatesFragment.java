@@ -18,7 +18,7 @@ import com.nexttech.easybusinesscard.R;
 
 public class TemplatesFragment extends Fragment {
 
-    private LinearLayout temp1, temp2, temp3;
+    private LinearLayout temp1, temp2, temp3, temp4, temp5, temp6, temp7;
 
 
     public TemplatesFragment() {
@@ -36,6 +36,10 @@ public class TemplatesFragment extends Fragment {
         temp1=view.findViewById(R.id.temp1);
         temp2=view.findViewById(R.id.temp2);
         temp3=view.findViewById(R.id.temp3);
+        temp4=view.findViewById(R.id.temp4);
+        temp5=view.findViewById(R.id.temp5);
+        temp6=view.findViewById(R.id.temp6);
+        temp7=view.findViewById(R.id.temp7);
 
         temp1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +64,42 @@ public class TemplatesFragment extends Fragment {
             public void onClick(View v) {
                 Intent i=new Intent(getContext(), ViewActivity.class);
                 i.putExtra("template","temp3");
+                startActivity(i);
+            }
+        });
+
+        temp4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getContext(), ViewActivity.class);
+                i.putExtra("template","temp4");
+                startActivity(i);
+            }
+        });
+
+        temp5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getContext(), ViewActivity.class);
+                i.putExtra("template","temp5");
+                startActivity(i);
+            }
+        });
+
+        temp6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getContext(), ViewActivity.class);
+                i.putExtra("template","temp6");
+                startActivity(i);
+            }
+        });
+
+        temp7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getContext(), ViewActivity.class);
+                i.putExtra("template","temp7");
                 startActivity(i);
             }
         });
