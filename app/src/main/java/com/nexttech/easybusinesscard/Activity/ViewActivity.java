@@ -68,7 +68,7 @@ public class ViewActivity extends AppCompatActivity {
     private QRGEncoder qrgEncoder;
     private AppCompatActivity activity;
 
-    View dialogueView;
+    View vi, dialogueView;
     AlertDialog.Builder builder;
     AlertDialog alertDialog;
 
@@ -90,7 +90,7 @@ public class ViewActivity extends AppCompatActivity {
 
         activity = this;
 
-        View vi = LayoutInflater.from(this).inflate(R.layout.business_card_layout,null);
+        vi = LayoutInflater.from(this).inflate(R.layout.temp1_business_card,null);
 
         cardFrontBackground = vi.findViewById(R.id.card_front_background);
         cardBackBackground = vi.findViewById(R.id.card_back_background);
@@ -338,19 +338,14 @@ public class ViewActivity extends AppCompatActivity {
             }
             linearLayout.addView(vi);
 
-
             generateQrCode();
         }
-
-
-
     }
 
     private void setUpAsOtherUser(){
         Log.e("debugging","here");
 
         try {
-
             String name = qrData.getString("name");
             String designation = qrData.getString("designation");
             String project = qrData.getString("project");
@@ -414,40 +409,43 @@ public class ViewActivity extends AppCompatActivity {
 
         switch (temp) {
             case "temp1":
-                imageResourceFront = getResources().getDrawable(R.drawable.temp1_front);
-                imageResourceBack = getResources().getDrawable(R.drawable.temp1_back);
+                callLayout(R.layout.temp1_business_card);
                 break;
             case "temp2":
-                imageResourceFront = getResources().getDrawable(R.drawable.temp2_front);
-                imageResourceBack = getResources().getDrawable(R.drawable.temp2_back);
+                callLayout(R.layout.temp2_business_card);
                 break;
             case "temp3":
-                imageResourceFront = getResources().getDrawable(R.drawable.temp3_front);
-                imageResourceBack = getResources().getDrawable(R.drawable.temp3_back);
+                callLayout(R.layout.temp3_business_card);
                 break;
             case "temp4":
-                imageResourceFront = getResources().getDrawable(R.drawable.temp4_front);
-                imageResourceBack = getResources().getDrawable(R.drawable.temp4_back);
+                callLayout(R.layout.temp4_business_card);
                 break;
             case "temp5":
-                imageResourceFront = getResources().getDrawable(R.drawable.temp5_front);
-                imageResourceBack = getResources().getDrawable(R.drawable.temp5_back);
+                callLayout(R.layout.temp5_business_card);
                 break;
             case "temp6":
-                imageResourceFront = getResources().getDrawable(R.drawable.temp6_front);
-                imageResourceBack = getResources().getDrawable(R.drawable.temp6_back);
-                break;
-            case "temp7":
-                imageResourceFront = getResources().getDrawable(R.drawable.temp7_front);
-                imageResourceBack = getResources().getDrawable(R.drawable.temp7_back);
+                callLayout(R.layout.temp6_business_card);
                 break;
         }
-
-        cardFrontBackground.setImageDrawable(imageResourceFront);
-        cardBackBackground.setImageDrawable(imageResourceBack);
-
     }
 
+    private void callLayout(int layout) {
+        vi = LayoutInflater.from(this).inflate(layout,null);
+
+        cardFrontBackground = vi.findViewById(R.id.card_front_background);
+        cardBackBackground = vi.findViewById(R.id.card_back_background);
+        cardName = vi.findViewById(R.id.card_name);
+        cardDesignation = vi.findViewById(R.id.card_designation);
+        cardProject = vi.findViewById(R.id.card_project);
+        cardCompanyName = vi.findViewById(R.id.card_company_name);
+        cardCompanyWebAddress = vi.findViewById(R.id.card_company_web_address);
+        cardCell = vi.findViewById(R.id.card_cell_number);
+        cardPhone = vi.findViewById(R.id.card_phone_number);
+        cardFax = vi.findViewById(R.id.card_fax_number);
+        cardEmail = vi.findViewById(R.id.card_email);
+        cardCompanyAddress = vi.findViewById(R.id.card_company_address);
+
+    }
 
     private void generateQrCode() {
 

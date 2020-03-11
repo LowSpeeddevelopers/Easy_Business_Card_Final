@@ -8,4 +8,11 @@
     <color name="color_actionbar">#4863A0</color>
     <color name="color_notificationbar">#eb1c22</color>
 
+    <color name="color_black">#000000</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_temp1">#b12027</color>
+    <color name="color_temp2">#f8b72e</color>
+    <color name="color_temp5">#fcb040</color>
+    <color name="color_temp6">#a27ab7</color>
+
 </resources>
