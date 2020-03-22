@@ -3,9 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="buttonColor">#3B5998</color>
-    <color name="borderColor">#395A9C</color>
-    <color name="color_actionbar">#4863A0</color>
+    <color name="buttonColor">#3B3131</color>
+    <color name="borderColor">#3B3131</color>
+    <color name="color_actionbar">#3B3131</color>
     <color name="color_notificationbar">#eb1c22</color>
 
     <color name="color_black">#000000</color>

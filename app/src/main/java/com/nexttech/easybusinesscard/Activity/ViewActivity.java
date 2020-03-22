@@ -510,9 +510,9 @@ public class ViewActivity extends AppCompatActivity {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                         ContentResolver resolver = getContentResolver();
                         ContentValues contentValues = new ContentValues();
-//            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, name);
-//            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/png");
-//            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, "Easy Business Card/" + "Folder");
+//                        contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName);
+//                        contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/png");
+//                        contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, filePath);
 
                         contentValues.put(MediaStore.Images.Media.TITLE, "title");
                         contentValues.put(MediaStore.Images.Media.DESCRIPTION, "description");
