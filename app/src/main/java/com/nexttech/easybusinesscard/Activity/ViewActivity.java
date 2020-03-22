@@ -1,6 +1,8 @@
 package com.nexttech.easybusinesscard.Activity;
 
 import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -42,7 +45,10 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.List;
+import java.util.Locale;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
@@ -141,7 +147,7 @@ public class ViewActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Bitmap b = loadBitmapFromView(linearLayout);
-                                saveImage(b, "MyCard-"+System.currentTimeMillis(), savePath+"/Cards/");
+                                saveCard(b, "MyCard-"+System.currentTimeMillis(), savePath+"/Cards/");
                             }
                         }, 1000);
                     }
@@ -153,7 +159,7 @@ public class ViewActivity extends AppCompatActivity {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                saveImage(qrBitmap, "QrCode-"+System.currentTimeMillis(), savePath+"/Qr Code/");
+                                saveCard(qrBitmap, "QrCode-"+System.currentTimeMillis(), savePath+"/Qr Code/");
                             }
                         }, 1000);
                     }
@@ -482,7 +488,75 @@ public class ViewActivity extends AppCompatActivity {
         return b;
     }
 
-    private void saveImage(final Bitmap b, final String fileName, final String filePath){
+    private void saveCard(final Bitmap b, final String fileName, final String filePath){
+
+        Dexter.withActivity(activity).withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).withListener(new MultiplePermissionsListener() {
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport report) {
+                try {
+
+                    boolean saved;
+                    OutputStream fos;
+
+                    File pathfile = new File(filePath);
+                    if(!pathfile.exists()){
+                        pathfile.mkdir();
+                    }
+
+
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        ContentResolver resolver = getContentResolver();
+                        ContentValues contentValues = new ContentValues();
+//            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, name);
+//            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/png");
+//            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, "Easy Business Card/" + "Folder");
+
+                        contentValues.put(MediaStore.Images.Media.TITLE, "title");
+                        contentValues.put(MediaStore.Images.Media.DESCRIPTION, "description");
+
+
+                        contentValues.put(MediaStore.Images.ImageColumns.BUCKET_ID, pathfile.toString().toLowerCase(Locale.US).hashCode());
+                        contentValues.put(MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME, pathfile.getName().toLowerCase(Locale.US));
+                        contentValues.put("_data", pathfile.getAbsolutePath());
+
+
+
+                        Uri imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+                        fos = resolver.openOutputStream(imageUri);
+                    } else {
+                        String imagesDir = filePath + File.separator;
+                        File file = new File(imagesDir);
+                        if (!file.exists()) {
+                            file.mkdir();
+                        }
+                        File image = new File(imagesDir, fileName + ".png");
+                        fos = new FileOutputStream(image);
+
+                    }
+
+                    saved = b.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                    if(saved){
+                        Toast.makeText(getApplicationContext(),"Image Saved",Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(getApplicationContext(),"Image Not Saved",Toast.LENGTH_SHORT).show();
+                    }
+
+                    fos.flush();
+                    fos.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                token.continuePermissionRequest();
+            }
+        }).check();
+    }
+
+    private void saveQr(final Bitmap b, final String fileName, final String filePath){
 
         Dexter.withActivity(activity).withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).withListener(new MultiplePermissionsListener() {
             @Override

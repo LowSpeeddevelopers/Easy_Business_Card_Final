@@ -140,8 +140,8 @@
 
             <TextView
                 android:id="@+id/card_phone_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:text="01766226262"
                 android:visibility="gone"
                 android:textColor="@color/color_white"
@@ -149,8 +149,8 @@
 
             <TextView
                 android:id="@+id/card_fax_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:text="01766226262"
                 android:visibility="gone"
                 android:textColor="@color/color_white"

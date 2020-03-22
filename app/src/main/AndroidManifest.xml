@@ -12,9 +12,11 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@drawable/businesscardlogo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/businesscardlogo"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
