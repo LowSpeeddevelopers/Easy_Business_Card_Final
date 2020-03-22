@@ -69,7 +69,7 @@ public class ViewActivity extends AppCompatActivity {
     CollectionCardModel cardData;
 
     private String qrCodeValue;
-    private String savePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Business Card/";
+    String savePath;
     private Bitmap qrBitmap;
     private QRGEncoder qrgEncoder;
     private AppCompatActivity activity;
@@ -89,6 +89,8 @@ public class ViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view);
 
         businessCardDb = new BusinessCardDb(ViewActivity.this);
+
+        savePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Business Card/";
 
         btnSave=findViewById(R.id.btnSave);
         btnShare=findViewById(R.id.btnShare);
