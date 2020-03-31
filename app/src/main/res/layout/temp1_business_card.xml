@@ -105,11 +105,11 @@
             android:id="@+id/layout_contact_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_35sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:gravity="right"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:gravity="left"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/card_back_background">
 
             <TextView
@@ -151,7 +151,7 @@
             android:id="@+id/layout_company_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -160,11 +160,13 @@
 
             <TextView
                 android:id="@+id/card_company_address"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
                 android:text="Dhaka"
                 android:textColor="@color/color_white"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_12sdp" />
 
         </LinearLayout>
 

@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_30sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:gravity="left"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/card_front_background"
@@ -90,23 +90,49 @@
                 android:textSize="@dimen/_22sdp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/card_company_web_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="www.google.com"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/_11sdp" />
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_contact_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_165sdp"
-            android:layout_marginTop="@dimen/_57sdp"
+            android:layout_marginStart="@dimen/_120sdp"
             android:gravity="left"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/card_back_background">
+            app:layout_constraintTop_toTopOf="@+id/card_back_background"
+            app:layout_constraintBottom_toBottomOf="@+id/card_back_background">
 
             <TextView
                 android:id="@+id/card_cell_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="01766226262"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/_11sdp" />
+
+            <TextView
+                android:id="@+id/card_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:text="01766226262"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/_11sdp" />
+
+            <TextView
+                android:id="@+id/card_fax_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
                 android:text="01766226262"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/_11sdp" />
@@ -120,57 +146,29 @@
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/_11sdp" />
 
-            <TextView
-                android:id="@+id/card_company_web_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:text="www.google.com"
-                android:textColor="@color/color_white"
-                android:textSize="@dimen/_11sdp" />
-
-            <TextView
-                android:id="@+id/card_company_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:text="Dhaka"
-                android:textColor="@color/color_white"
-                android:textSize="@dimen/_11sdp" />
-
-            <TextView
-                android:id="@+id/card_phone_number"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="01766226262"
-                android:visibility="gone"
-                android:textColor="@color/color_white"
-                android:textSize="@dimen/_11sdp" />
-
-            <TextView
-                android:id="@+id/card_fax_number"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="01766226262"
-                android:visibility="gone"
-                android:textColor="@color/color_white"
-                android:textSize="@dimen/_11sdp" />
-
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_company_address"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_7sdp"
-            android:gravity="center"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:gravity="left"
             android:orientation="vertical"
+            android:layout_marginStart="@dimen/_120sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-
+            <TextView
+                android:id="@+id/card_company_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dhaka"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/_11sdp" />
 
         </LinearLayout>
 

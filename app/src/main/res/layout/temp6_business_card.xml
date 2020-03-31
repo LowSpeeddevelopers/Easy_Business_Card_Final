@@ -166,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:text="Dhaka"
                 android:textColor="@color/color_black"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_12sdp" />
 
         </LinearLayout>
 

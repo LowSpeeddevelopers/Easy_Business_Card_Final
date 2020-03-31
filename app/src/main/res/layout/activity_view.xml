@@ -4,7 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Activity.ViewActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="vertical"
+        android:background="@color/color_actionbar"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Business Card"
+            android:layout_gravity="center"
+            android:textColor="#fff"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:gravity="center" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,16 +56,25 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:text="save"
-                    />
+                    android:textColor="@color/color_white"
+                    style="@android:style/TextAppearance.Small"
+                    android:background="@drawable/button_signup"
+                    android:text="save" />
+
+                <View
+                    android:layout_width="@dimen/_5sdp"
+                    android:layout_height="match_parent" />
+
                 <Button
                     android:id="@+id/btnShare"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:text="share"
-                    />
+                    android:textColor="@color/color_white"
+                    style="@android:style/TextAppearance.Small"
+                    android:background="@drawable/button_signup"
+                    android:text="share" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

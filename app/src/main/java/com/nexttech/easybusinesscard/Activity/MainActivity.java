@@ -1,10 +1,7 @@
 package com.nexttech.easybusinesscard.Activity;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -42,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     TextView titleview, tvUserName, tvUserDesignation, tvUserCompanyName;
     public static ImageView backbutton;
     public static ImageView navbutton;
-    CardView home, privacy_policy,help,about,update;
+    CardView home, privacy_policy,about,update;
     DrawerLayout mlayout;
 
     ScrollView scrollView;
@@ -65,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         mlayout = findViewById(R.id.drawerlayout);
 
         privacy_policy = findViewById(R.id.button_privacy);
-        help = findViewById(R.id.button_help);
         about = findViewById(R.id.button_about_us);
         navbutton = toolbar.findViewById(R.id.navbutton);
         update = findViewById(R.id.button_updateinfo);
@@ -75,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         tvUserCompanyName = findViewById(R.id.tv_user_company_name);
 
         fetchUserData();
+
+        backbutton.setVisibility(View.GONE);
 
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -98,12 +96,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        help.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mlayout.closeDrawer(GravityCompat.END);
-            }
-        });
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -214,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<ContactModel> juniorDesign = new ArrayList<>();
 
         seniorDeveloper.add(new ContactModel("RmFoaW0gRmFoYWQgTGVvbg==", "ZmFoaW1mYWhhZGxlb0BnbWFpbC5jb20=", "MDE5MTQ2MTY0NTM=", "aHR0cHM6Ly9naXRodWIuY29tL2ZhaGltZmFoYWRsZW8="));
-        juniorDeveloper.add(new ContactModel("QWZyb3ogSG9zc2Fpbg==", "YWZyb3oubmVyb0BnbWFpbC5jb20=", "MDE3NjYyMjYyNjI=", "aHR0cHM6Ly9naXRodWIuY29tL2Fmcm96LW5lcm8="));
+        juniorDeveloper.add(new ContactModel("QWZyb3ogSG9zc2Fpbg==", "YWZyb3pob3NzYWluOTdAZ21haWwuY29t", "MDE3NjYyMjYyNjI=", "aHR0cHM6Ly9naXRodWIuY29tL2Fmcm96LW5lcm8="));
         juniorDeveloper.add(new ContactModel("TmF5YW4gQ2hha3JhYmFydHk=", "bmF5YW5kY2M1QGdtYWlsLmNvbQ==", "MDE1MjEzODA5NzQ=", "aHR0cHM6Ly9naXRodWIuY29tL25heWFuY2hha3JhYmFydHk="));
         juniorDeveloper.add(new ContactModel("UXVhemkgTWFoYWJ1YnVsIEhhc2Fu", "aHJpZG95aGFzYW4xNEBnbWFpbC5jb20=", "MDE5MTM2Mjg0MTA=", "aHR0cHM6Ly9naXRodWIuY29tL0hyaWRveUhhc2Fu"));
         juniorDeveloper.add(new ContactModel("U2hhaGFyaWFyIE5ld2F6IFRha2k=", "c2hhaGFyaWFybmF3c2hpbnRha2lAZ21haWwuY29t", "MDE2NzkxMzE0MTM=", "aHR0cHM6Ly9naXRodWIuY29tL3NoYWhhcmlhcnRha2k="));

@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Afroz Hossain"
-                android:textColor="@color/color_temp2"
+                android:textColor="@color/color_temp4"
                 android:textStyle="bold"
                 android:textSize="@dimen/_18sdp" />
 
@@ -86,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NextTech Ltd"
-                android:textColor="@color/color_temp2"
+                android:textColor="@color/color_temp4"
                 android:textSize="@dimen/_22sdp"
                 android:textStyle="bold" />
 
@@ -105,47 +105,35 @@
             android:id="@+id/layout_contact_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_35sdp"
-            android:layout_marginBottom="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:gravity="left"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/card_back_background">
+            app:layout_constraintTop_toTopOf="@+id/card_back_background">
 
             <TextView
                 android:id="@+id/card_cell_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="01766226262"
-                android:layout_marginBottom="@dimen/_13sdp"
-                android:textColor="@color/color_white"
-                android:textSize="@dimen/_11sdp" />
-
-            <TextView
-                android:id="@+id/card_company_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dhaka"
-                android:layout_marginBottom="@dimen/_12sdp"
-                android:textColor="@color/color_white"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/_11sdp" />
 
             <TextView
                 android:id="@+id/card_phone_number"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="01766226262"
-                android:visibility="gone"
-                android:textColor="@color/color_white"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/_11sdp" />
 
             <TextView
                 android:id="@+id/card_fax_number"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="01766226262"
-                android:visibility="gone"
-                android:textColor="@color/color_white"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/_11sdp" />
 
             <TextView
@@ -153,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="afroz.nero@gmail.com"
-                android:textColor="@color/color_white"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/_11sdp" />
 
 
@@ -161,16 +149,27 @@
 
         <LinearLayout
             android:id="@+id/layout_company_address"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_7sdp"
             android:gravity="center"
             android:orientation="vertical"
+            android:background="@color/color_temp4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
 
+            <TextView
+                android:id="@+id/card_company_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dhaka"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/_12sdp" />
 
         </LinearLayout>
 

@@ -161,7 +161,7 @@ public class ViewActivity extends AppCompatActivity {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                saveCard(qrBitmap, "QrCode-"+System.currentTimeMillis(), savePath+"/Qr Code/");
+                                saveQr(qrBitmap, "QrCode-"+System.currentTimeMillis(), savePath+"/Qr Code/");
                             }
                         }, 1000);
                     }
@@ -394,10 +394,10 @@ public class ViewActivity extends AppCompatActivity {
         cardProject.setText(userData.getProject());
         cardCompanyName.setText(userData.getCompanyName());
         cardCompanyWebAddress.setText(userData.getWebsite());
-        cardCell.setText(userData.getMobile());
-        cardPhone.setText(userData.getPhone());
-        cardFax.setText(userData.getFax());
-        cardEmail.setText(userData.getEmail());
+        cardCell.setText(String.format("Cell : %s", userData.getMobile()));
+        cardPhone.setText(String.format("Phone : %s", userData.getPhone()));
+        cardFax.setText(String.format("Fax : %s", userData.getFax()));
+        cardEmail.setText(String.format("Email : %s", userData.getEmail()));
         cardCompanyAddress.setText(userData.getAddress());
 
         if (userData.getPhone().isEmpty()){
@@ -502,7 +502,7 @@ public class ViewActivity extends AppCompatActivity {
 
                     File pathfile = new File(filePath);
                     if(!pathfile.exists()){
-                        pathfile.mkdir();
+                        pathfile.mkdirs();
                     }
 
 
