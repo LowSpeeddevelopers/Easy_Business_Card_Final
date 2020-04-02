@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:scrollbars="none"
+
 
         >
         <LinearLayout
@@ -144,12 +144,12 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_border"
                     android:gravity="center"
+                    android:padding="@dimen/_6sdp"
                     android:hint="+88"
-                    android:editable="false"
                     android:enabled="false"
                     android:textColor="#000"
                     style="@android:style/TextAppearance.Medium"
-                    android:padding="@dimen/_6sdp" />
+                     />
                 <View
                     android:layout_width="@dimen/_10sdp"
                     android:layout_height="0dp"/>
