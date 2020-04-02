@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         privacy_policy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,PrivacyPolicy.class));
                 mlayout.closeDrawer(GravityCompat.END);
 
             }

@@ -23,6 +23,7 @@
         <activity android:name=".Activity.AppIntroActivity" />
         <activity android:name=".Activity.ViewActivity" />
         <activity android:name=".Activity.InformationActivity" />
+        <activity android:name=".Activity.PrivacyPolicy" />
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.SplashActivity">
             <intent-filter>
