@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(tag.equals("Templates")){
             navbutton.setVisibility(View.VISIBLE);
-            backbutton.setVisibility(View.VISIBLE);
+            backbutton.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.navigation_card:
                             navbutton.setVisibility(View.VISIBLE);
-                            backbutton.setVisibility(View.VISIBLE);
+                            backbutton.setVisibility(View.INVISIBLE);
                             openFragment(new TemplatesFragment(),"Templates");
                             return true;
                         case R.id.navigation_scan:
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                             return true;
                         case R.id.navigation_collections:
                             navbutton.setVisibility(View.VISIBLE);
-                            backbutton.setVisibility(View.VISIBLE);
+                            backbutton.setVisibility(View.INVISIBLE);
                             openFragment(new CollectonsFragment(),"Collections");
                             return true;
                     }
