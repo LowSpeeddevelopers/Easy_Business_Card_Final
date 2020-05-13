@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,6 +26,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.nexttech.easybusinesscard.DB.BusinessCardDb;
 import com.nexttech.easybusinesscard.Fragments.CollectonsFragment;
 import com.nexttech.easybusinesscard.Fragments.ScanFragment;
@@ -31,7 +40,10 @@ import com.nexttech.easybusinesscard.Model.ContactModel;
 import com.nexttech.easybusinesscard.Model.UserInfoModel;
 import com.nexttech.easybusinesscard.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     TextView titleview, tvUserName, tvUserDesignation, tvUserCompanyName;
     public static ImageView backbutton;
     public static ImageView navbutton;
-    CardView home, privacy_policy,about,update;
+    CardView home, privacy_policy, about, update;
     DrawerLayout mlayout;
 
     ScrollView scrollView;
@@ -75,14 +87,43 @@ public class MainActivity extends AppCompatActivity {
         backbutton.setVisibility(View.GONE);
 
 
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("STATUS");
+
+
+        reference.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                String valid_until = dataSnapshot.child("DATE").getValue().toString();
+                String value = dataSnapshot.child("VALUE").getValue().toString();
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+                String finaldate = dateFormat.format(cal.getTime());
+                Date today = new Date(finaldate);
+                Date validuntil = new Date(valid_until);
+                if (today.after(validuntil)) {
+                    Toast.makeText(MainActivity.this, "invalid", Toast.LENGTH_SHORT).show();
+                    Integer.parseInt(value);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TemplatesFragment test = (TemplatesFragment) getSupportFragmentManager().findFragmentByTag("Templates");
-                if(test!=null && !test.isVisible()){
-                    openFragment(new TemplatesFragment(),"Templates");
+                if (test != null && !test.isVisible()) {
+                    openFragment(new TemplatesFragment(), "Templates");
                     mlayout.closeDrawer(GravityCompat.END);
-                }else {
+                } else {
                     mlayout.closeDrawer(GravityCompat.END);
                 }
             }
@@ -91,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         privacy_policy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,PrivacyPolicy.class));
+                startActivity(new Intent(MainActivity.this, PrivacyPolicy.class));
                 mlayout.closeDrawer(GravityCompat.END);
 
             }
@@ -117,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,InformationActivity.class));
+                startActivity(new Intent(MainActivity.this, InformationActivity.class));
                 mlayout.closeDrawer(GravityCompat.END);
             }
         });
@@ -125,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              onBackPressed();
+                onBackPressed();
             }
         });
 
@@ -137,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-        openFragment(new TemplatesFragment(),"Templates");
+        openFragment(new TemplatesFragment(), "Templates");
 
     }
 
@@ -146,20 +187,20 @@ public class MainActivity extends AppCompatActivity {
 
         userData = businessCardDb.getUserData();
 
-        if (userData!=null){
+        if (userData != null) {
             tvUserName.setText(userData.getName());
             tvUserDesignation.setText(userData.getDesignation());
             tvUserCompanyName.setText(userData.getCompanyName());
         }
     }
 
-    public void openFragment(Fragment fragment,String tag) {
+    public void openFragment(Fragment fragment, String tag) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, fragment,tag);
+        transaction.replace(R.id.container, fragment, tag);
         transaction.commit();
         titleview.setText(tag);
 
-        if(tag.equals("Templates")){
+        if (tag.equals("Templates")) {
             navbutton.setVisibility(View.VISIBLE);
             backbutton.setVisibility(View.INVISIBLE);
         }
@@ -167,40 +208,41 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.navigation_card:
                             navbutton.setVisibility(View.VISIBLE);
                             backbutton.setVisibility(View.INVISIBLE);
-                            openFragment(new TemplatesFragment(),"Templates");
+                            openFragment(new TemplatesFragment(), "Templates");
                             return true;
                         case R.id.navigation_scan:
                             navbutton.setVisibility(View.GONE);
                             backbutton.setVisibility(View.GONE);
-                            openFragment(new ScanFragment(MainActivity.this),"Scan");
+                            openFragment(new ScanFragment(MainActivity.this), "Scan");
                             return true;
                         case R.id.navigation_collections:
                             navbutton.setVisibility(View.VISIBLE);
                             backbutton.setVisibility(View.INVISIBLE);
-                            openFragment(new CollectonsFragment(),"Collections");
+                            openFragment(new CollectonsFragment(), "Collections");
                             return true;
                     }
                     return false;
                 }
             };
 
- 
+
     @Override
     public void onBackPressed() {
         TemplatesFragment test = (TemplatesFragment) getSupportFragmentManager().findFragmentByTag("Templates");
-        if(test!=null && test.isVisible()){
+        if (test != null && test.isVisible()) {
             super.onBackPressed();
-        }else {
-            openFragment(new TemplatesFragment(),"Templates");
+        } else {
+            openFragment(new TemplatesFragment(), "Templates");
         }
     }
 
-    private View createContactUs(){
+    private View createContactUs() {
         ArrayList<ContactModel> seniorDeveloper = new ArrayList<>();
         ArrayList<ContactModel> juniorDeveloper = new ArrayList<>();
         ArrayList<ContactModel> seniorDesign = new ArrayList<>();
@@ -216,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
 
         scrollView = new ScrollView(this);
         LinearLayout.LayoutParams scrollParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        scrollView.setPadding(10,10,10,10);
+        scrollView.setPadding(10, 10, 10, 10);
         scrollView.setLayoutParams(scrollParam);
 
         mainLayout = new LinearLayout(this);
@@ -236,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
         return scrollView;
     }
 
-    private TextView singleText(String text, int alignment, float size){
+    private TextView singleText(String text, int alignment, float size) {
         TextView tv = new TextView(this);
         tv.setText(text);
         LinearLayout.LayoutParams tvParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -248,11 +290,11 @@ public class MainActivity extends AppCompatActivity {
         return tv;
     }
 
-    private CardView addContact(String title, ArrayList<ContactModel> information){
+    private CardView addContact(String title, ArrayList<ContactModel> information) {
         CardView cardView = new CardView(this);
 
         LinearLayout.LayoutParams cardViewParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        cardViewParam.setMargins(20,20,20,20);
+        cardViewParam.setMargins(20, 20, 20, 20);
 
         cardView.setLayoutParams(cardViewParam);
         cardView.setPadding(20, 20, 20, 20);
@@ -267,19 +309,19 @@ public class MainActivity extends AppCompatActivity {
 
         linearLayout.addView(singleText(title, View.TEXT_ALIGNMENT_TEXT_START, 20));
 
-        for (int i = 0; i<information.size(); i++){
+        for (int i = 0; i < information.size(); i++) {
             ContactModel contactModel = information.get(i);
 
             View view = new View(this);
             LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 2);
-            viewParams.setMargins(0,10,0,10);
+            viewParams.setMargins(0, 10, 0, 10);
             view.setLayoutParams(viewParams);
             view.setBackgroundColor(Color.GRAY);
 
             LinearLayout linearLayout1 = new LinearLayout(this);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             linearLayout1.setLayoutParams(layoutParams);
-            linearLayout1.setPadding(0,10,0,0);
+            linearLayout1.setPadding(0, 10, 0, 0);
             linearLayout1.setOrientation(LinearLayout.VERTICAL);
 
             linearLayout1.addView(singleText(contactModel.getName(), View.TEXT_ALIGNMENT_TEXT_START, 18));
