@@ -256,7 +256,10 @@ public class MainActivity extends AppCompatActivity {
 //        juniorDeveloper.add(new ContactModel("UXVhemkgTWFoYWJ1YnVsIEhhc2Fu", "aHJpZG95aGFzYW4xNEBnbWFpbC5jb20=", "MDE5MTM2Mjg0MTA=", "aHR0cHM6Ly9naXRodWIuY29tL0hyaWRveUhhc2Fu"));
         juniorDeveloper.add(new ContactModel("U2hhaGFyaWFyIE5ld2F6IFRha2k=", "c2hhaGFyaWFybmF3c2hpbnRha2lAZ21haWwuY29t", "MDE2NzkxMzE0MTM=", "aHR0cHM6Ly9naXRodWIuY29tL3NoYWhhcmlhcnRha2k="));
         juniorDeveloper.add(new ContactModel("Ry5LLlNuaWdkaGE=", "Z2tzbmlnZGhhY3NlNDFAZ21haWwuY29t", "MDE3ODMwMzkyMzk=", "aHR0cHM6Ly9naXRodWIuY29tL0dLU25pZ2RoYQ=="));
+        seniorDesign.add(new ContactModel("QWhhbWVkIFJpenZp", "cml6dmlhaGFtZWQxMDBAZ21haWwuY29t", "MDE2MTkxODc3NzA=", "aHR0cHM6Ly93d3cuYmVoYW5jZS5uZXQvcml6dmlhaGFtZWQ="));
+        juniorDesign.add(new ContactModel("Uy4gTS4gUmFzaGlkdWwgSXNsYW0=", "bXJhc2hpZHVsMjAxMEBnbWFpbC5jb20=", "MDE3Nzg1NjIyMDA=", "aHR0cHM6Ly93d3cuYmVoYW5jZS5uZXQvcmFzaGlkdWw2Ng=="));
         cardDesign.add(new ContactModel("QWlmdXIgUmFobWFuIFNodXZv", "YXIuc2h1dm9AZ3JhcGhpYy1kZXNpZ25lci5jb20=", "MDE2ODgzMDE0Njk=", "aHR0cHM6Ly93d3cuYmVoYW5jZS5uZXQvYXJfc2h1dm8="));
+        logoDesign.add(new ContactModel("QXNmYWsgTWFobXVk", "YXNmYWttYWhtdWRiZEBnbWFpbC5jb20=", "MDE3MzI5NDgxMDU=", "IA=="));
 
 
         scrollView = new ScrollView(this);
@@ -300,25 +303,30 @@ public class MainActivity extends AppCompatActivity {
         leadsLogo.setImageResource(R.drawable.leads_logo);
         leadsLogo.setAdjustViewBounds(true);
 
-
-
         companyLogo.addView(appleLogo);
         companyLogo.addView(logoSpace);
         companyLogo.addView(leadsLogo);
 
+        View view = new View(this);
+        LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 3);
+        viewParams.setMargins(0, 10, 0, 10);
+        view.setLayoutParams(viewParams);
+        view.setBackgroundColor(Color.GRAY);
+
         companyInfo.addView(companyLogo);
         companyInfo.addView(singleText("LEADS Training Ltd & Apple Soft IT JV", View.TEXT_ALIGNMENT_CENTER, 15));
+        companyInfo.addView(view);
 
         // Company Info
 
         mainLayout.addView(singleText("Contact Us", View.TEXT_ALIGNMENT_CENTER, 24));
-        mainLayout.addView(addContact("Senior Developer", seniorDeveloper));
-        mainLayout.addView(addContact("Junior Developer", juniorDeveloper));
-        mainLayout.addView(addContact("Senior UI Design", seniorDesign));
-        mainLayout.addView(addContact("Junior UI Design", juniorDesign));
+        mainLayout.addView(companyInfo);
+        mainLayout.addView(addContact("Developer Coach", seniorDeveloper));
+        mainLayout.addView(addContact("Developer", juniorDeveloper));
+        mainLayout.addView(addContact("Design Coach", seniorDesign));
+        mainLayout.addView(addContact("UI Design", juniorDesign));
         mainLayout.addView(addContact("Card Design", cardDesign));
         mainLayout.addView(addContact("Logo Design", logoDesign));
-        mainLayout.addView(companyInfo);
 
         scrollView.addView(mainLayout);
 
